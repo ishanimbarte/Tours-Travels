@@ -694,7 +694,6 @@ function SimpleDropdown({ data, onSelect }) {
   );
 }
 
-// bus section//////////////
 function BusForm() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
