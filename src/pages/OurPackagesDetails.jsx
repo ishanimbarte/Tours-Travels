@@ -24,39 +24,39 @@ const packagesData = {
   },
 
   3: {
-    title: "Hill Station Holiday",
+    title: "Bali Adventure Tour",
     image:
       img1,
-    duration: "4 Nights / 5 Days",
+    duration: "5 Nights / 6 Days",
     overview:
       "Explore scenic hill stations with comfortable stays and breathtaking views.",
   },
 
   4: {
-    title: "Desert Safari",
+    title: "Dubai Luxury Tour",
     image:
       img2,
-    duration: "2 Nights / 3 Days",
+    duration: "5 Nights / 6 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Dubai’s luxury hotels, shopping, and sightseeing with comfortable stays.",
   },
 
   5: {
-    title: "Goa Beach Holiday",
+    title: "Honeymoon in Maldives",
     image:
       img2,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Maldives’ pristine beaches, overwater bungalows, and crystal clear waters with relaxing stays.",
   },
 
   6: {
-    title: "Goa Beach Holiday",
+    title: "Family Trip to Manali",
     image:
       img2,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Manali’s scenic beauty, hill stations, and family-friendly activities with comfortable stays.",
   },
 };
 

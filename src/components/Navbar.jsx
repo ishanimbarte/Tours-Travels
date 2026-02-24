@@ -123,7 +123,7 @@ export default function Navbar() {
 
               {dropdown === "services" && (
                 <div className="absolute top-full left-0 mt-2 bg-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
-                  <Link to="/flight-booking">Flight Booking</Link>
+                  <Link to="/flight-booking">Ticket Booking</Link>
                   <Link to="/hotel-booking">Hotel Booking</Link>
                   <Link to="/visa-services">Visa Services</Link>
                 </div>
@@ -151,40 +151,40 @@ export default function Navbar() {
             </Link>
 
             {/* ✅ Profile Dropdown */}
-<div className="relative" ref={profileRef}>
-  <button
-    onClick={() => setProfileOpen(!profileOpen)}
-    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition"
-  >
-    <User size={20} />
-  </button>
+          <div className="relative" ref={profileRef}>
+            <button
+              onClick={() => setProfileOpen(!profileOpen)}
+              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition"
+            >
+              <User size={20} />
+            </button>
 
-  {profileOpen && (
-    <div className="absolute right-0 mt-3 w-44 bg-white shadow-xl rounded-xl overflow-hidden border z-50">
+            {profileOpen && (
+              <div className="absolute right-0 mt-3 w-44 bg-white shadow-xl rounded-xl overflow-hidden border z-50">
 
-      {/* Edit Profile */}
-      <Link
-        to="/edit-profile"
-        className="block px-4 py-3 hover:bg-gray-100 text-sm"
-        onClick={() => setProfileOpen(false)}
-      >
-        Edit Profile
-      </Link>
+                {/* Edit Profile */}
+                <Link
+                  to="/edit-profile"
+                  className="block px-4 py-3 hover:bg-gray-100 text-sm"
+                  onClick={() => setProfileOpen(false)}
+                >
+                  Edit Profile
+                </Link>
 
-      {/* Logout */}
-      <button
-        className="w-full text-left px-4 py-3 hover:bg-gray-100 text-sm"
-        onClick={() => {
-          setProfileOpen(false);
-          alert("Logged out");
-        }}
-      >
-        Logout
-      </button>
+                {/* Logout */}
+                <button
+                  className="w-full text-left px-4 py-3 hover:bg-gray-100 text-sm"
+                  onClick={() => {
+                    setProfileOpen(false);
+                    alert("Logged out");
+                  }}
+                >
+                  Logout
+                </button>
 
-    </div>
-  )}
-</div>
+              </div>
+            )}
+          </div>
 
           </div>
 
@@ -204,35 +204,132 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div
-          className={`md:hidden fixed top-0 left-0 w-full h-screen bg-white transform transition-transform duration-300 ${
-            isOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          <div className="flex justify-between items-center p-5 border-b">
-            <h2 className="text-xl font-bold">
-              Travel<span className="text-orange-500">Go</span>
-            </h2>
-            <button onClick={closeMenu}>✕</button>
+      <div
+        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-white transform transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-5 border-b">
+          <h2 className="text-xl font-bold">
+            Travel<span className="text-orange-500">Go</span>
+          </h2>
+          <button onClick={closeMenu}>✕</button>
+        </div>
+
+        <div className="flex flex-col p-6 space-y-5 font-medium">
+
+          <Link to="/virtual-tour" onClick={closeMenu}>Virtual Tour</Link>
+
+          <Link to="/about" onClick={closeMenu}>About</Link>
+
+          {/* Packages */}
+          <div>
+            <button
+              className="flex justify-between items-center w-full"
+              onClick={() => setMobileDropdown(!mobileDropdown)}
+            >
+              Packages
+              <ChevronDown
+                size={18}
+                className={`transition ${
+                  mobileDropdown ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {mobileDropdown && (
+              <div className="ml-4 mt-3 flex flex-col space-y-3 text-gray-600">
+                <Link to="/domestic-tours" onClick={closeMenu}>Domestic Tours</Link>
+                <Link to="/international-tours" onClick={closeMenu}>International Tours</Link>
+                <Link to="/honeymoon" onClick={closeMenu}>Honeymoon Packages</Link>
+                <Link to="/family-tours" onClick={closeMenu}>Family Tours</Link>
+                <Link to="/adventure-tours" onClick={closeMenu}>Adventure Trips</Link>
+                <Link to="/religious-tours" onClick={closeMenu}>Religious Tours</Link>
+              </div>
+            )}
           </div>
 
-          <div className="flex flex-col p-6 space-y-5 font-medium">
-            <Link to="/" onClick={closeMenu}>Home</Link>
-            <Link to="/about" onClick={closeMenu}>About</Link>
-            <Link to="/contact" onClick={closeMenu}>Contact</Link>
+          {/* Services */}
+          <div>
+            <button
+              className="flex justify-between items-center w-full"
+              onClick={() => setMobileServices(!mobileServices)}
+            >
+              Services
+              <ChevronDown
+                size={18}
+                className={`transition ${
+                  mobileServices ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {mobileServices && (
+              <div className="ml-4 mt-3 flex flex-col space-y-3 text-gray-600">
+                <Link to="/flight-booking" onClick={closeMenu}>Flight Booking</Link>
+                <Link to="/hotel-booking" onClick={closeMenu}>Hotel Booking</Link>
+                <Link to="/visa-services" onClick={closeMenu}>Visa Services</Link>
+              </div>
+            )}
           </div>
+
+          <Link to="/contact" onClick={closeMenu}>Contact</Link>
+
+          {/* Auth Buttons */}
+          <Link
+            to="/login"
+            onClick={closeMenu}
+            className="border px-4 py-2 rounded-lg text-center"
+          >
+            Login
+          </Link>
+
+          <Link
+            to="/signup"
+            onClick={closeMenu}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center"
+          >
+            Sign Up
+          </Link>
+
+          {/* Profile Options */}
+          <div className="border-t pt-4 flex flex-col space-y-3">
+
+            <Link
+              to="/edit-profile"
+              onClick={closeMenu}
+              className="px-4 py-2 rounded-lg bg-gray-100 text-center"
+            >
+              Edit Profile
+            </Link>
+
+            <button
+              onClick={() => {
+                closeMenu();
+                alert("Logged out");
+              }}
+              className="px-4 py-2 rounded-lg bg-red-500 text-white"
+            >
+              Logout
+            </button>
+
+          </div>
+
         </div>
+      </div>
+
       </nav>
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/919999999999"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-[999] bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition"
-      >
-        💬
-      </a>
+      href="https://wa.me/919999999999"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-5 right-5 z-[9999] bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition"
+    >
+      💬
+    </a>
+    
     </>
   );
 }

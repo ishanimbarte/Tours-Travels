@@ -5,57 +5,59 @@ import img1 from "../assets/kashmir-bg.jpg";
 
 const packagesData = {
   1: {
-    title: "Kashmir Paradise Tour",
+    title: "Manali Adventure Tour",
     image:
       img1,
     duration: "5 Nights / 6 Days",
     overview:
-      "Explore the beautiful valleys of Kashmir including Srinagar, Gulmarg, and Pahalgam with comfortable stays and scenic experiences.",
+      "Explore the beautiful valleys of Manali including Solang Valley, Rohtang Pass, and Beas River with comfortable stays and scenic experiences.",
   },
 
   2: {
-    title: "Goa Beach Holiday",
+    title: "Kashmir Paradise Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "6 Nights / 7 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Kashmir’s scenic beauty, hill stations, and family-friendly activities with comfortable stays.",
   },
 
   3: {
-    title: "Goa Beach Holiday",
+    title: "Royal Rajasthan Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "7 Nights / 8 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Experience the royal heritage of Rajasthan with visits to palaces, forts, and traditional culture with comfortable stays.",
   },
 
   4: {
-    title: "Goa Beach Holiday",
+    title: "Odisha Temple Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Explore the ancient temples and cultural heritage of Odisha with comfortable stays.",
+
   },
 
   5: {
-    title: "Goa Beach Holiday",
+    title: "Uttarakhand Hill Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "5 Nights / 6 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy the scenic beauty of Uttarakhand with visits to hill stations, temples, and nature trails with comfortable stays.",
   },
 
   6: {
-    title: "Goa Beach Holiday",
+    title: "Shimla Honeymoon Special",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy the romantic charm of Shimla with scenic views, cozy stays, and honeymoon-friendly activities.",
+
   },
 
 

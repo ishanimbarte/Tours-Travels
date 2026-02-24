@@ -31,7 +31,7 @@ import AdventureTourDetails from "./pages/AdventureTourDetails";
 import ReligiousTours from "./pages/ReligiousTours";
 import ReligiousTourDetails from "./pages/ReligiousTourDetails";
 import AboutPage from "./pages/About";
-import FlightBooking from "./pages/FlightBooking";
+import BookingPage from "./pages/FlightBooking";
 import HotelBooking from "./pages/HotelBooking";
 import VisaServices from "./pages/VisaServices";
 import VisaApplication from "./pages/VisaApplication";
@@ -85,7 +85,7 @@ function App() {
         <Route path="/religious-tours" element={<ReligiousTours />} />
         <Route path="/religious-tours/:id" element={<ReligiousTourDetails />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/flight-booking" element={<FlightBooking />} />
+        <Route path="/flight-booking" element={<BookingPage />} />
         <Route path="/hotel-booking" element={<HotelBooking />} />
         <Route path="/visa-services" element={<VisaServices />} />
         <Route path="/visa-application" element={<VisaApplication />} />

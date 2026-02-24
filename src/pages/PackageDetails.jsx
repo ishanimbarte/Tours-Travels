@@ -14,12 +14,12 @@ const packagesData = {
   },
 
   2: {
-    title: "Goa Beach Holiday",
+    title: "Manali Adventure Trip",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Manali’s scenic beauty, hill stations, and family-friendly activities with comfortable stays.",
   },
 
   3: {
@@ -32,12 +32,12 @@ const packagesData = {
   },
 
   4: {
-    title: "Goa Beach Holiday",
+    title: "Dubai Luxury Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "5 Nights / 6 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Dubai’s luxury hotels, shopping, and sightseeing with comfortable stays.",
   },
 };
 

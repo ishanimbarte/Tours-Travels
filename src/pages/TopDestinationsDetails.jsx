@@ -5,7 +5,7 @@ import img1 from "../assets/kashmir-bg.jpg";
 
 const packagesData = {
   1: {
-    title: "Kashmir Paradise Tour",
+    title: "Goa Beach Holiday",
     image:
       img1,
     duration: "5 Nights / 6 Days",
@@ -14,48 +14,49 @@ const packagesData = {
   },
 
   2: {
-    title: "Goa Beach Holiday",
+    title: "Kashmir Paradise Tour",
     image:
       img1,
-    duration: "3 Nights / 4 Days",
+    duration: "4 Nights / 5 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Kashmir’s scenic beauty, hill stations, and family-friendly activities with comfortable stays.",
   },
 
   3: {
-    title: "Goa Beach Holiday",
+    title: "Bali Adventure Tour",
     image:
       img1,
     duration: "3 Nights / 4 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Experience Bali’s vibrant culture, adventure activities, and scenic beauty with comfortable stays.",
   },
 
   4: {
-    title: "Goa Beach Holiday",
+    title: "Dubai Luxury Tour",
     image:
       img1,
     duration: "3 Nights / 4 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Dubai’s luxury hotels, shopping, and sightseeing with comfortable stays.",
   },
 
   5: {
-    title: "Goa Beach Holiday",
+    title: "Paris Holiday",
     image:
       img1,
     duration: "3 Nights / 4 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Experience the romantic charm of Paris with iconic landmarks, fine dining, and cultural tours.",
+
   },
 
   6: {
-    title: "Goa Beach Holiday",
+    title: "Manali Adventure Trip",
     image:
       img1,
     duration: "3 Nights / 4 Days",
     overview:
-      "Enjoy Goa’s beaches, nightlife, water sports, and Portuguese heritage culture with relaxing stays.",
+      "Enjoy Manali’s scenic beauty, hill stations, and family-friendly activities with comfortable stays.",
   },
 };
 
