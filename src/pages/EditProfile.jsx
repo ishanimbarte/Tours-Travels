@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Camera } from "lucide-react";
+import { getProfile } from "../api/api";
 
 export default function EditProfile() {
   const [form, setForm] = useState({
@@ -9,6 +10,7 @@ export default function EditProfile() {
     password: "",
     photo: null,
   });
+  const [user, setUser] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,6 +22,28 @@ export default function EditProfile() {
     }
   };
 
+  useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const data = await getProfile();
+      setUser(data);
+
+      setForm({
+        name: data.name || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        password: "",
+        photo: data.photo || null
+      });
+
+    } catch (error) {
+      console.error("Profile fetch error:", error);
+    }
+  };
+
+  fetchProfile();
+}, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Profile Updated Successfully ✅");
@@ -29,6 +53,31 @@ export default function EditProfile() {
     <div className="min-h-screen pt-28 pb-16 px-4 bg-gradient-to-br from-blue-100 via-white to-orange-100 flex items-center justify-center">
       
       <div className="w-full max-w-3xl bg-white/70 backdrop-blur-xl shadow-2xl rounded-3xl p-8 md:p-10 border border-white/40">
+
+      {user && (
+  <div className="flex items-center gap-4 mb-8 p-4 bg-white rounded-2xl shadow-md">
+    
+    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
+      {user.photo ? (
+        <img
+          src={`https://tours-travels-backend-production.up.railway.app/${user.photo}`}
+          alt="profile"
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center text-gray-500">
+          👤
+        </div>
+      )}
+    </div>
+
+    <div>
+      <h3 className="text-lg font-semibold">{user.name}</h3>
+      <p className="text-gray-500 text-sm">{user.email}</p>
+    </div>
+
+  </div>
+)}
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center mb-8">

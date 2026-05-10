@@ -1,8 +1,38 @@
 // src/pages/Signup.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../api/api";
 
 export default function Signup() {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await register({
+        name,
+        email,
+        password
+      });
+
+      console.log("Signup success:", response);
+
+      navigate("/login");
+
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Signup failed");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-orange-50 px-4">
   <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 relative overflow-hidden">
@@ -14,26 +44,38 @@ export default function Signup() {
       Sign Up
     </h2>
 
-    <form className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSignup}>
+      {error && (
+            <div className="text-red-500 text-sm">{error}</div>
+          )}
       <div>
         <input
           type="text"
           placeholder="Full Name"
+          value={name}
+          onChange={(e)=>setName(e.target.value)}
           className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm transition duration-300 hover:shadow-md"
+          required
         />
       </div>
       <div>
         <input
           type="email"
           placeholder="Email"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
           className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm transition duration-300 hover:shadow-md"
+          required
         />
       </div>
       <div>
         <input
           type="password"
           placeholder="Password"
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
           className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm transition duration-300 hover:shadow-md"
+          required
         />
       </div>
 

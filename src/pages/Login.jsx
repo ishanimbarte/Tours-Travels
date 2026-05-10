@@ -1,14 +1,34 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../api/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", { email, password });
-    // Add your login logic here
+    setError("");
+    
+    try {
+      const response = await login({ email, password });
+      console.log("Login successful:", response);
+
+      if (response.token) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("userRole", response.role);
+      }
+      
+      // Redirect to home page
+      navigate("/");
+    } catch (err) {
+      console.error("Login error:", err);
+      console.error("Error response:", err.response);
+      console.error("Error data:", err.response?.data);
+      setError(err.response?.data?.message || "Login failed. Please try again.");
+    }
   };
 
   return (
@@ -23,6 +43,12 @@ export default function Login() {
     </h2>
 
     <form className="space-y-6" onSubmit={handleLogin}>
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+          {error}
+        </div>
+      )}
+      
       <div>
         <input
           type="email"
