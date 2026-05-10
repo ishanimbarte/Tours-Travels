@@ -59,8 +59,8 @@ export default function Navbar() {
       <nav
         className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/80 backdrop-blur-lg shadow-md py-3"
-            : "bg-white backdrop-blur-md py-5"
+            ? "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5"
+            : "bg-transparent py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
@@ -69,21 +69,21 @@ export default function Navbar() {
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className={`text-2xl font-bold ${
-              scrolled ? "text-black" : "text-blue-600"
+            className={`font-serif text-2xl ${
+              scrolled ? "text-black" : "text-white"
             }`}
           >
-            Travel<span className="text-orange-500">Go</span>
+            Alshi<span className="text-orange-500 text-terracotta">fa</span>
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center space-x-8 font-medium">
+          <ul className="hidden md:flex items-center space-x-8 font-medium text-sm">
 
-            <Link to="/virtual-tour" className="hover:text-blue-600">
+            <Link to="/virtual-tour" className={scrolled ? "text-black" : "text-white"}>
               Virtual Tour
             </Link>
 
-            <Link to="/about" className="hover:text-blue-600">
+            <Link to="/about" className={scrolled ? "text-black" : "text-white"}>
               About
             </Link>
 
@@ -93,14 +93,14 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter("packages")}
               onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 hover:text-blue-600">
+              <button className="flex items-center gap-1 text-white">
                 Packages <ChevronDown size={18} />
               </button>
 
               <div className="absolute top-full left-0 w-full h-4"></div>
 
               {dropdown === "packages" && (
-                <div className="absolute top-full left-0 mt-2 bg-white shadow-xl rounded-2xl p-6 w-[520px] grid grid-cols-2 gap-4 z-50">
+                <div className="absolute top-full left-0 mt-2 bg-transparent text-white shadow-xl rounded-2xl p-6 w-[520px] grid grid-cols-2 gap-4 z-50">
                   <Link to="/domestic-tours">Domestic Tours</Link>
                   <Link to="/international-tours">International Tours</Link>
                   <Link to="/honeymoon">Honeymoon Packages</Link>
@@ -117,12 +117,12 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter("services")}
               onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 hover:text-blue-600">
+              <button className="flex items-center gap-1 text-white">
                 Services <ChevronDown size={18} />
               </button>
 
               {dropdown === "services" && (
-                <div className="absolute top-full left-0 mt-2 bg-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
+                <div className="absolute top-full left-0 mt-2 bg-transparent text-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
                   <Link to="/flight-booking">Ticket Booking</Link>
                   <Link to="/hotel-booking">Hotel Booking</Link>
                   <Link to="/visa-services">Visa Services</Link>
@@ -130,22 +130,24 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" className="text-white">
+              Contact
+            </Link>
           </ul>
 
           {/* Right Side */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6 mr-0">
 
             <Link
               to="/login"
-              className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+              className="px-4 py-2 text-white rounded-sm border border-gray-300 hover:bg-gray-100"
             >
               Login
             </Link>
 
             <Link
               to="/signup"
-              className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+              className="px-5 py-2 rounded-sm bg-white text-black hover:bg-blue-100"
             >
               Sign Up
             </Link>
@@ -211,7 +213,7 @@ export default function Navbar() {
       >
         <div className="flex justify-between items-center p-5 border-b">
           <h2 className="text-xl font-bold">
-            Travel<span className="text-orange-500">Go</span>
+            Alshi<span className="text-orange-500">fa</span>
           </h2>
           <button onClick={closeMenu}>✕</button>
         </div>
