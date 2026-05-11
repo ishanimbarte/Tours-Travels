@@ -76,7 +76,7 @@ export default function Packages() {
 
         {/* Heading */}
         <div className="text-center mb-10 md:mb-14">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-gray-800">
             Our Packages
           </h2>
           <p className="mt-3 md:mt-4 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
@@ -92,7 +92,7 @@ export default function Packages() {
               onClick={() => setFilter(cat)}
               className={`px-4 md:px-5 py-2 rounded-full font-semibold text-sm md:text-base transition ${
                 filter === cat
-                  ? "bg-blue-600 text-white"
+                  ? "bg-black text-white"
                   : "bg-white border border-gray-300 text-gray-700 hover:bg-blue-50"
               }`}
             >
@@ -102,46 +102,81 @@ export default function Packages() {
         </div>
 
         {/* Packages Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filteredPackages.map((pkg, index) => (
-            <motion.div
-              key={pkg.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden group hover:shadow-2xl transition"
-            >
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={pkg.image}
-                  alt={pkg.title}
-                  className="h-52 sm:h-56 md:h-60 w-full object-cover group-hover:scale-110 transition duration-500"
-                />
-                <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-orange-500 text-white px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-semibold shadow">
-                  {pkg.price}
-                </div>
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8">
+  {filteredPackages.map((pkg, index) => (
+    <motion.div
+      key={pkg.id}
+      initial={{ opacity: 0, y: 70 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: index * 0.12 }}
+      viewport={{ once: true }}
+      className="group"
+    >
+      <div className="relative overflow-hidden rounded-[30px] bg-white shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)]">
 
-              {/* Content */}
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800">
-                  {pkg.title}
-                </h3>
-                <p className="text-gray-600 mt-1 md:mt-2 text-sm md:text-base">
-                  Duration: {pkg.duration}
-                </p>
+        {/* Image */}
+        <div className="relative overflow-hidden">
+          <img
+            src={pkg.image}
+            alt={pkg.title}
+            className="h-64 md:h-72 w-full object-cover group-hover:scale-105 transition duration-700"
+          />
 
-                <Link to={`/our-packages/${pkg.id}`}>
-                  <button className="mt-4 md:mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-medium transition text-sm md:text-base">
-                    View Details
-                  </button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+          {/* Elegant Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+
+          {/* Price Badge */}
+          <div className="absolute top-5 left-5 bg-white/15 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-xs tracking-[0.15em] uppercase shadow-lg">
+            {pkg.price}
+          </div>
+
+          {/* Bottom Content Over Image */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <p className="text-white/80 text-[11px] uppercase tracking-[0.25em] mb-2">
+              Premium Tour Package
+            </p>
+
+            <h3 className="font-serif text-3xl font-light text-white leading-tight">
+              {pkg.title}
+            </h3>
+          </div>
         </div>
+
+        {/* Content */}
+        <div className="p-6">
+
+          {/* Duration */}
+          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gray-400 mb-1">
+                Duration
+              </p>
+
+              <p className="text-gray-700 font-medium">
+                {pkg.duration}
+              </p>
+            </div>
+
+            {/* Minimal Circle */}
+            <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-700 text-lg">
+              ✈
+            </div>
+          </div>
+
+          {/* Button */}
+          <Link to={`/our-packages/${pkg.id}`}>
+            <button className="mt-6 w-full rounded-full border border-black bg-black text-white py-3 text-sm uppercase tracking-[0.2em] transition-all duration-500 hover:bg-white hover:text-black">
+              View Details
+            </button>
+          </Link>
+        </div>
+
+        {/* Animated Bottom Border */}
+        <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-black group-hover:w-full transition-all duration-700"></div>
+      </div>
+    </motion.div>
+  ))}
+</div>
       </div>
     </section>
   );

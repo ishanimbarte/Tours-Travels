@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
 
         {/* Heading */}
         <div className="text-center mb-10 sm:mb-12 md:mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-800">
             Why Choose Us
           </h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
@@ -51,32 +51,59 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-7 md:gap-8">
-          {reasons.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl p-5 sm:p-6 text-center shadow-lg hover:shadow-2xl transition"
-            >
-              <div
-                className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full mx-auto mb-4 sm:mb-5 ${item.bg}`}
-              >
-                {item.icon}
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+  {reasons.map((item, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -10, scale: 1.03 }}
+      className="group relative overflow-hidden rounded-[30px] bg-white/80 backdrop-blur-xl border border-white/20 p-6 text-center shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(59,130,246,0.18)] transition-all duration-500"
+    >
 
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1.5 sm:mb-2">
-                {item.title}
-              </h3>
+      {/* Animated Gradient Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-pink-500/10 opacity-0 group-hover:opacity-100 transition duration-700"></div>
 
-              <p className="text-gray-600 text-xs sm:text-sm">
-                {item.desc}
-              </p>
-            </motion.div>
-          ))}
+      {/* Floating Blur Circle */}
+      <div className="absolute -top-10 -right-10 w-28 h-28 bg-blue-200/30 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+
+      {/* Shine Animation */}
+      <div className="absolute -left-32 top-0 w-32 h-full bg-white/30 skew-x-12 group-hover:left-[140%] transition-all duration-1000"></div>
+
+      {/* Icon Container */}
+      <div
+        className={`relative w-20 h-20 flex items-center justify-center rounded-[24px] mx-auto mb-6 ${item.bg}
+        shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
+      >
+
+        {/* Glow Behind Icon */}
+        <div className="absolute inset-0 rounded-[24px] bg-white/20 blur-md"></div>
+
+        <div className="relative z-10 text-3xl">
+          {item.icon}
         </div>
+      </div>
+
+      {/* Title */}
+      <h3 className="relative text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">
+        {item.title}
+      </h3>
+
+      {/* Small Divider */}
+      <div className="w-12 h-1 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 mx-auto mb-4 group-hover:w-20 transition-all duration-500"></div>
+
+      {/* Description */}
+      <p className="relative text-gray-600 text-sm leading-relaxed">
+        {item.desc}
+      </p>
+
+      {/* Bottom Hover Border */}
+      <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-pink-500 group-hover:w-full transition-all duration-500"></div>
+    </motion.div>
+  ))}
+</div>
 
       </div>
     </section>

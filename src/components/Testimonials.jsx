@@ -44,7 +44,7 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-3xl sm:text-2xl md:text-4xl font-bold text-gray-800">
+          <h2 className="font-serif text-3xl sm:text-2xl md:text-4xl text-gray-800">
             What Our Travelers Say ❤️
           </h2>
           <p className="text-gray-600 mt-2 md:mt-3 text-sm sm:text-base">

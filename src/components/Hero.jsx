@@ -28,10 +28,10 @@ export default function Hero() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="text-3xl sm:text-4xl md:text-6xl font-bold leading-snug md:leading-tight"
+      className="font-serif italic text-3xl sm:text-4xl md:text-6xl font-bold leading-snug md:leading-tight"
     >
       Discover Your Next <br />
-      <span className="text-yellow-300">Dream Destination</span>
+      <span className="font-serif text-yellow-300">Dream Destination</span>
     </motion.h1>
 
     <motion.p

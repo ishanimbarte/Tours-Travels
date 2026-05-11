@@ -50,79 +50,122 @@ export default function PopularPackages() {
 
         {/* Heading */}
         <div className="text-center mb-10 sm:mb-12 md:mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">
+          <h2 className="text-2xl font-serif sm:text-3xl md:text-4xl lg:text-5xl text-gray-800">
             Popular Tour Packages
           </h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 max-w-4xl mx-auto">
             Discover our most loved travel experiences designed for unforgettable
             memories and adventures around the world.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
-          {packages.map((pkg, index) => (
-            <motion.div
-              key={pkg.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden group hover:shadow-2xl transition"
-            >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+  {packages.map((pkg, index) => (
+    <motion.div
+      key={pkg.id}
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -12 }}
+      className="group relative rounded-[32px] overflow-hidden bg-white shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.25)] transition-all duration-500 border border-white/20"
+    >
+      {/* Animated Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-orange-400/10 opacity-0 group-hover:opacity-100 transition duration-700"></div>
 
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={pkg.image}
-                  alt={pkg.title}
-                  className="h-52 sm:h-56 md:h-60 w-full object-cover group-hover:scale-110 transition duration-500"
-                />
+      {/* Shine Effect */}
+      <div className="absolute -top-40 -left-40 w-72 h-72 bg-white/30 rotate-12 group-hover:left-[120%] transition-all duration-1000 blur-2xl"></div>
 
-                {/* Price Badge */}
-                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-orange-500 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold shadow">
-                  {pkg.price}
-                </div>
-              </div>
+      {/* Image Section */}
+      <div className="relative overflow-hidden">
+        <img
+          src={pkg.image}
+          alt={pkg.title}
+          className="h-64 w-full object-cover group-hover:scale-110 transition duration-700"
+        />
 
-              {/* Content */}
-              <div className="p-4 sm:p-5">
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
 
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
-                  {pkg.title}
-                </h3>
-
-                <div className="flex items-center text-gray-500 mt-1.5 sm:mt-2 text-xs sm:text-sm">
-                  <MapPin size={16} className="mr-1" />
-                  {pkg.location}
-                </div>
-
-                <p className="mt-1.5 sm:mt-2 text-gray-600 text-xs sm:text-sm">
-                  Duration: {pkg.duration}
-                </p>
-
-                {/* Rating */}
-                <div className="flex items-center mt-2.5 sm:mt-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className="text-yellow-400 fill-yellow-400"
-                    />
-                  ))}
-                </div>
-
-                {/* Button */}
-                <Link to={`/package/${pkg.id}`}>
-                  <button className="mt-4 sm:mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-sm sm:text-base">
-                    View Details
-                  </button>
-                </Link>
-              </div>
-
-            </motion.div>
-          ))}
+        {/* Floating Price Badge */}
+        <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-xl backdrop-blur-md border border-white/20">
+          {pkg.price}
         </div>
+
+        {/* Top Right Floating Icon */}
+        <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-lg flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-red-500 transition">
+          ❤
+        </button>
+
+        {/* Bottom Text Overlay */}
+        <div className="absolute bottom-5 left-5">
+          <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+            {pkg.title}
+          </h3>
+
+          <div className="flex items-center text-white/90 mt-1 text-sm">
+            <MapPin size={15} className="mr-1" />
+            {pkg.location}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative p-6">
+
+        {/* Duration Card */}
+        <div className="flex items-center justify-between bg-gray-50 rounded-2xl px-4 py-3 border border-gray-100">
+          <div>
+            <p className="text-xs text-gray-400 uppercase tracking-wide">
+              Duration
+            </p>
+            <p className="font-semibold text-gray-700">
+              {pkg.duration}
+            </p>
+          </div>
+
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-lg">
+            ✈
+          </div>
+        </div>
+
+        {/* Rating */}
+        <div className="flex items-center justify-between mt-5">
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={17}
+                className="text-yellow-400 fill-yellow-400"
+              />
+            ))}
+          </div>
+
+          <span className="text-sm font-semibold text-gray-500">
+            5.0 Reviews
+          </span>
+        </div>
+
+        {/* Button */}
+        <Link to={`/package/${pkg.id}`}>
+          <button className="relative overflow-hidden mt-6 w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white py-3.5 rounded-2xl font-semibold tracking-wide shadow-lg hover:shadow-blue-300 transition-all duration-500">
+            
+            {/* Button Glow */}
+            <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></span>
+
+            <span className="relative z-10">
+              View Details →
+            </span>
+          </button>
+        </Link>
+      </div>
+
+      {/* Bottom Border Glow */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-400 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+    </motion.div>
+  ))}
+</div>
 
       </div>
     </section>
