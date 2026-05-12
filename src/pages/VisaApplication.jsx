@@ -92,216 +92,314 @@ export default function VisaApplication() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-indigo-50 pt-24 py-14 px-4 relative overflow-hidden">
 
-      {/* Heading */}
-      <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
-        Visa Services
-      </h2>
+  {/* Background Blur Effects */}
+  <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-200 rounded-full blur-3xl opacity-30"></div>
 
-      {/* Tabs */}
-      <div className="flex justify-center gap-4 mb-10 flex-wrap">
-        <button
-          onClick={() => setActiveTab("form")}
-          className={`px-6 py-2 rounded-lg font-semibold ${
-            activeTab === "form"
-              ? "bg-blue-600 text-white"
-              : "bg-white border"
-          }`}
-        >
-          Apply Visa
-        </button>
+  {/* Heading */}
+  <div className="text-center mb-12 relative z-10">
+    <p className="uppercase tracking-[5px] text-blue-600 font-semibold text-sm mb-3">
+      Visa Assistance
+    </p>
 
-        <button
-          onClick={() => setActiveTab("countries")}
-          className={`px-6 py-2 rounded-lg font-semibold ${
-            activeTab === "countries"
-              ? "bg-blue-600 text-white"
-              : "bg-white border"
-          }`}
-        >
-          Country Details
-        </button>
+    <h2 className="text-5xl font-bold text-gray-900 font-serif">
+      Travel Without Stress ✈️
+    </h2>
 
-        <button
-          onClick={() => setActiveTab("pricing")}
-          className={`px-6 py-2 rounded-lg font-semibold ${
-            activeTab === "pricing"
-              ? "bg-blue-600 text-white"
-              : "bg-white border"
-          }`}
-        >
-          Pricing
-        </button>
+    <p className="text-gray-600 mt-4 max-w-2xl mx-auto leading-relaxed">
+      Fast & reliable visa support for tourist, business, student,
+      and work visas with expert consultation and smooth processing.
+    </p>
+  </div>
+
+  {/* Tabs */}
+  <div className="flex justify-center gap-4 mb-12 flex-wrap relative z-10">
+
+    {[
+      { key: "form", label: "Apply Visa" },
+      { key: "countries", label: "Country Details" },
+      { key: "pricing", label: "Pricing" },
+    ].map((tab) => (
+      <button
+        key={tab.key}
+        onClick={() => setActiveTab(tab.key)}
+        className={`px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md ${
+          activeTab === tab.key
+            ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white scale-105"
+            : "bg-white/80 backdrop-blur border border-gray-200 text-gray-700 hover:bg-blue-50"
+        }`}
+      >
+        {tab.label}
+      </button>
+    ))}
+
+  </div>
+
+  {/* ================= FORM ================= */}
+  {activeTab === "form" && (
+    <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl border border-white/40 shadow-2xl rounded-[30px] p-8 md:p-10 relative z-10">
+
+      <div className="text-center mb-8">
+        <h3 className="text-3xl font-bold text-gray-900 font-serif">
+          Visa Application Form
+        </h3>
+
+        <p className="text-gray-500 mt-2">
+          Fill in your details and our experts will contact you shortly.
+        </p>
       </div>
 
-      {/* ================= FORM ================= */}
-      {activeTab === "form" && (
-        <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-xl p-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
 
-          <h3 className="text-2xl font-bold mb-6 text-center">
-            Visa Application Form
-          </h3>
+        <div className="grid md:grid-cols-2 gap-5">
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Full Name
+            </label>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Mobile Number"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              />
-
-              <select
-                name="country"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              >
-                <option value="">Select Country</option>
-                <option>USA</option>
-                <option>Canada</option>
-                <option>UK</option>
-                <option>Australia</option>
-                <option>Dubai</option>
-                <option>Singapore</option>
-              </select>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <select
-                name="visaType"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              >
-                <option value="">Visa Type</option>
-                <option>Tourist Visa</option>
-                <option>Business Visa</option>
-                <option>Student Visa</option>
-                <option>Work Visa</option>
-              </select>
-
-              <input
-                type="date"
-                name="travelDate"
-                required
-                onChange={handleChange}
-                className="border p-3 rounded-lg w-full"
-              />
-            </div>
-
-            <textarea
-              name="message"
-              placeholder="Additional Information"
-              rows="4"
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              required
               onChange={handleChange}
-              className="border p-3 rounded-lg w-full"
-            ></textarea>
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition"
+            />
+          </div>
 
-            <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-              Submit Application
-            </button>
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Email Address
+            </label>
 
-          </form>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              onChange={handleChange}
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition"
+            />
+          </div>
+
         </div>
-      )}
 
-      {/* ================= COUNTRY DETAILS ================= */}
-      {activeTab === "countries" && (
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-5">
 
-          {countries.map((country, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition"
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Mobile Number
+            </label>
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Enter mobile number"
+              required
+              onChange={handleChange}
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Select Country
+            </label>
+
+            <select
+              name="country"
+              required
+              onChange={handleChange}
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition bg-white"
             >
-              <h3 className="text-xl font-bold text-blue-600 mb-4">
-                {country.name}
-              </h3>
+              <option value="">Choose destination</option>
+              <option>USA</option>
+              <option>Canada</option>
+              <option>UK</option>
+              <option>Australia</option>
+              <option>Dubai</option>
+              <option>Singapore</option>
+            </select>
+          </div>
 
-              <p><strong>Processing Time:</strong> {country.processing}</p>
-              <p><strong>Validity:</strong> {country.validity}</p>
-              <p className="mt-2 text-lg font-semibold text-green-600">
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Visa Type
+            </label>
+
+            <select
+              name="visaType"
+              required
+              onChange={handleChange}
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition bg-white"
+            >
+              <option value="">Select visa type</option>
+              <option>Tourist Visa</option>
+              <option>Business Visa</option>
+              <option>Student Visa</option>
+              <option>Work Visa</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+              Travel Date
+            </label>
+
+            <input
+              type="date"
+              name="travelDate"
+              required
+              onChange={handleChange}
+              className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition"
+            />
+          </div>
+
+        </div>
+
+        <div>
+          <label className="text-sm font-semibold text-gray-700">
+            Additional Information
+          </label>
+
+          <textarea
+            name="message"
+            placeholder="Write your travel plans or any additional details..."
+            rows="5"
+            onChange={handleChange}
+            className="mt-2 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 p-4 rounded-2xl w-full outline-none transition resize-none"
+          ></textarea>
+        </div>
+
+        <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-2xl font-semibold text-lg shadow-lg hover:scale-[1.02] hover:shadow-blue-300 transition-all duration-300">
+          Submit Application ✨
+        </button>
+
+      </form>
+    </div>
+  )}
+
+  {/* ================= COUNTRY DETAILS ================= */}
+  {activeTab === "countries" && (
+    <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+
+      {countries.map((country, index) => (
+        <div
+          key={index}
+          className="group bg-white/80 backdrop-blur-xl border border-white/40 rounded-[28px] shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2"
+        >
+
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+            <h3 className="text-2xl font-bold font-serif">
+              {country.name}
+            </h3>
+
+            <p className="text-blue-100 mt-1">
+              Fast & secure visa processing
+            </p>
+          </div>
+
+          <div className="p-6 space-y-4">
+
+            <div className="flex justify-between items-center">
+              <span className="text-gray-500">Processing Time</span>
+
+              <span className="font-semibold text-gray-800">
+                {country.processing}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="text-gray-500">Validity</span>
+
+              <span className="font-semibold text-gray-800">
+                {country.validity}
+              </span>
+            </div>
+
+            <div className="pt-2">
+              <p className="text-3xl font-bold text-green-600">
                 {country.price}
               </p>
-
-              <button
-                onClick={() => setActiveTab("form")}
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg"
-              >
-                Apply Now
-              </button>
             </div>
-          ))}
 
-        </div>
-      )}
-
-      {/* ================= PRICING ================= */}
-      {activeTab === "pricing" && (
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`bg-white rounded-xl shadow-lg p-6 text-center relative ${
-                plan.popular ? "border-2 border-blue-600" : ""
-              }`}
+            <button
+              onClick={() => setActiveTab("form")}
+              className="mt-4 w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-2xl font-semibold hover:scale-[1.02] transition"
             >
-              {plan.popular && (
-                <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
-                  Popular
-                </span>
-              )}
+              Apply Now
+            </button>
 
-              <h3 className="text-xl font-bold mb-3">{plan.title}</h3>
-
-              <p className="text-3xl font-bold text-blue-600 mb-4">
-                {plan.price}
-              </p>
-
-              <ul className="space-y-2 mb-6 text-gray-600">
-                {plan.features.map((f, i) => (
-                  <li key={i}>✔ {f}</li>
-                ))}
-              </ul>
-
-              <button
-                onClick={() => setActiveTab("form")}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-              >
-                Choose Plan
-              </button>
-            </div>
-          ))}
-
+          </div>
         </div>
-      )}
+      ))}
 
     </div>
+  )}
+
+  {/* ================= PRICING ================= */}
+  {activeTab === "pricing" && (
+    <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+
+      {plans.map((plan, index) => (
+        <div
+          key={index}
+          className={`relative bg-white/80 backdrop-blur-xl border rounded-[30px] shadow-xl p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+            plan.popular
+              ? "border-blue-600 scale-105"
+              : "border-white/40"
+          }`}
+        >
+
+          {plan.popular && (
+            <span className="absolute top-5 right-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs px-4 py-1 rounded-full shadow">
+              Most Popular
+            </span>
+          )}
+
+          <h3 className="text-2xl font-bold text-gray-900 font-serif mb-4">
+            {plan.title}
+          </h3>
+
+          <p className="text-5xl font-bold text-blue-600 mb-6">
+            {plan.price}
+          </p>
+
+          <ul className="space-y-3 mb-8 text-gray-600">
+            {plan.features.map((f, i) => (
+              <li
+                key={i}
+                className="bg-gray-50 rounded-xl py-2 px-3"
+              >
+                ✔ {f}
+              </li>
+            ))}
+          </ul>
+
+          <button
+            onClick={() => setActiveTab("form")}
+            className={`w-full py-3 rounded-2xl font-semibold transition-all duration-300 ${
+              plan.popular
+                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg"
+                : "bg-gray-100 hover:bg-blue-50 text-gray-800"
+            }`}
+          >
+            Choose Plan
+          </button>
+
+        </div>
+      ))}
+
+    </div>
+  )}
+
+</div>
   );
 }

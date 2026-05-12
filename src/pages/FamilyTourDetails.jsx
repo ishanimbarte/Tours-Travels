@@ -130,252 +130,351 @@ Total Price: ₹${totalPrice}`;
   if (!pkg) return <div className="pt-32 text-center">Package Not Found</div>;
 
   return (
-    <div className="pt-24 bg-gray-50">
-      {/* Banner */}
-      <div className="relative h-[420px]">
-        <img
-          src={pkg.image}
-          alt={pkg.title}
-          className="w-full h-full object-cover"
-        />
+    <div className="bg-gradient-to-b from-yellow-50 via-white to-orange-50 min-h-screen pt-0 pb-20 overflow-hidden relative">
 
-        <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-bold">{pkg.title}</h1>
-          <p className="mt-3">{pkg.duration}</p>
+  {/* Background Glow */}
+  <div className="absolute top-0 left-0 w-80 h-80 bg-yellow-300/20 blur-3xl rounded-full"></div>
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-300/20 blur-3xl rounded-full"></div>
+
+  {/* Banner */}
+  <div className="relative h-[500px] overflow-hidden">
+
+    <img
+      src={pkg.image}
+      alt={pkg.title}
+      className="w-full h-full object-cover scale-105"
+    />
+
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+
+    {/* Floating Content */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 z-10">
+
+      <span className="bg-yellow-400/20 backdrop-blur-md border border-white/20 px-5 py-2 rounded-full text-sm tracking-widest uppercase mb-5">
+        Family Vacation
+      </span>
+
+      <h1 className="text-5xl md:text-7xl font-extrabold leading-tight drop-shadow-2xl">
+        {pkg.title}
+      </h1>
+
+      <p className="mt-5 text-lg md:text-xl text-white/90 max-w-2xl">
+        {pkg.duration} • Create unforgettable memories with your loved ones
+      </p>
+
+
+
+    </div>
+  </div>
+
+  {/* Main Content */}
+  <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-3 gap-10 relative z-10">
+
+    {/* LEFT CONTENT */}
+    <div className="lg:col-span-2 space-y-10">
+
+      {/* Overview */}
+      <section className="bg-white/80 backdrop-blur-xl border border-white/40 rounded-[30px] shadow-xl p-8">
+
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-12 h-12 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
+            👨‍👩‍👧‍👦
+          </div>
+
+          <h2 className="text-3xl font-bold text-gray-800">
+            Overview
+          </h2>
         </div>
-      </div>
 
-      {/* Content + Sidebar */}
-      <div className="max-w-7xl mx-auto px-6 py-14 grid lg:grid-cols-3 gap-10">
-
-        {/* LEFT CONTENT */}
-        <div className="lg:col-span-2 space-y-12">
-
-          {/* Overview */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Overview 👨‍👩‍👧‍👦</h2>
-            <p className="text-gray-600">{pkg.overview}</p>
-          </section>
-
-          {/* Tour Itinerary */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Tour Itinerary</h2>
-
-            <div className="space-y-4">
-              {itinerary.map((day, i) => (
-                <div key={i} className="bg-white rounded-xl shadow">
-
-                  {/* HEADER */}
-                  <button
-                    onClick={() =>
-                      setOpenDay(openDay === i ? null : i)
-                    }
-                    className="w-full text-left p-5 flex justify-between items-center"
-                  >
-                    <h3 className="font-semibold">
-                      Day {i + 1}
-                    </h3>
-
-                    <span className="text-xl font-bold text-yellow-500">
-                      {openDay === i ? "-" : "+"}
-                    </span>
-                  </button>
-
-                  {/* CONTENT */}
-                  {openDay === i && (
-                    <div className="px-5 pb-5 text-gray-600 text-sm">
-                      <p className="font-medium mb-1">{day.title}</p>
-                      <p>{day.details}</p>
-                    </div>
-                  )}
-
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Inclusions */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Inclusions</h2>
-            <ul className="list-disc pl-6 space-y-2 text-gray-600">
-              <li>Hotel accommodation with breakfast & dinner</li>
-              <li>Private transportation</li>
-              <li>Sightseeing as per itinerary</li>
-              <li>All toll taxes & parking</li>
-            </ul>
-          </section>
-
-          {/* Exclusions */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Exclusions</h2>
-            <ul className="list-disc pl-6 space-y-2 text-gray-600">
-              <li>Airfare / Train tickets</li>
-              <li>Personal expenses</li>
-              <li>Entry tickets to monuments</li>
-              <li>Travel insurance</li>
-            </ul>
-          </section>
-
-          {/* Rate Card */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Rate Card</h2>
-
-  <div className="grid md:grid-cols-3 gap-6">
-    {[
-      { type: "Standard", price: "₹14,999" },
-      { type: "Deluxe", price: "₹19,999" },
-      { type: "Luxury", price: "₹29,999" },
-    ].map((plan, i) => (
-      <div
-        key={i}
-        className="bg-white rounded-xl shadow p-6 text-center"
-      >
-        <h3 className="font-bold text-lg">{plan.type}</h3>
-
-        <p className="text-2xl text-yellow-500 font-bold mt-2">
-          {plan.price}
+        <p className="text-gray-600 leading-8 text-lg">
+          {pkg.overview}
         </p>
-      </div>
-    ))}
-  </div>
-</section>
 
-{/* Payment Terms */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Payment Terms</h2>
+      </section>
 
-  <p className="text-gray-600">
-    30% advance required at booking confirmation. Remaining balance
-    payable before departure.
-  </p>
-</section>
+      {/* Tour Itinerary */}
+      <section className="bg-white/80 backdrop-blur-xl border border-white/40 rounded-[30px] shadow-xl p-8">
 
-{/* Cancellation Policy */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">
-    Cancellation & Refund Policy
-  </h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-8">
+          Tour Itinerary
+        </h2>
 
-  <p className="text-gray-600">
-    Cancellation charges depend on the time before departure.
-    Refund processed within 7–10 working days.
-  </p>
-</section>
+        <div className="space-y-5">
 
-{/* Packages by Theme */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Packages by Theme</h2>
+          {itinerary.map((day, i) => (
+            <div
+              key={i}
+              className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-100 rounded-2xl overflow-hidden shadow-sm"
+            >
 
-  <div className="grid md:grid-cols-2 gap-6">
-    <ul className="list-disc pl-6 text-gray-600 space-y-2">
-      <li>Honeymoon Special</li>
-      <li>Family Friendly</li>
-      <li>Adventure Tour</li>
-    </ul>
+              {/* HEADER */}
+              <button
+                onClick={() =>
+                  setOpenDay(openDay === i ? null : i)
+                }
+                className="w-full px-6 py-5 flex justify-between items-center hover:bg-white/50 transition"
+              >
 
-    <ul className="list-disc pl-6 text-gray-600 space-y-2">
-      <li>Luxury Experience</li>
-      <li>Budget Package</li>
-      <li>Group Tour</li>
-    </ul>
-  </div>
-</section>
+                <div>
+                  <p className="text-sm text-yellow-600 font-semibold">
+                    Day {i + 1}
+                  </p>
+
+                  <h3 className="font-bold text-lg text-gray-800 mt-1">
+                    {day.title}
+                  </h3>
+                </div>
+
+                <div className="w-10 h-10 rounded-full bg-yellow-400 text-white flex items-center justify-center text-2xl font-bold shadow-lg">
+                  {openDay === i ? "-" : "+"}
+                </div>
+
+              </button>
+
+              {/* CONTENT */}
+              {openDay === i && (
+                <div className="px-6 pb-6 text-gray-600 leading-7">
+                  {day.details}
+                </div>
+              )}
+
+            </div>
+          ))}
 
         </div>
 
-        {/* RIGHT SIDEBAR */}
-        <div className="lg:col-span-1">
+      </section>
 
-          <h3 className="text-xl font-bold mb-4">Book This Tour</h3>
+      {/* Inclusions & Exclusions */}
+      <div className="grid md:grid-cols-2 gap-8">
 
-          <div className="space-y-4">
+        {/* Inclusions */}
+        <section className="bg-white rounded-[28px] shadow-xl p-7 border border-green-100">
 
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+          <h2 className="text-2xl font-bold text-green-600 mb-5">
+            ✔ Inclusions
+          </h2>
 
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+          <ul className="space-y-4 text-gray-600">
+            <li className="flex items-start gap-3">
+              <span className="text-green-500">✓</span>
+              Hotel accommodation with breakfast & dinner
+            </li>
 
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+            <li className="flex items-start gap-3">
+              <span className="text-green-500">✓</span>
+              Private transportation
+            </li>
 
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
+            <li className="flex items-start gap-3">
+              <span className="text-green-500">✓</span>
+              Sightseeing as per itinerary
+            </li>
 
-              <input
-                type="date"
-                min={fromDate}
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
+            <li className="flex items-start gap-3">
+              <span className="text-green-500">✓</span>
+              All toll taxes & parking
+            </li>
+          </ul>
 
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="number"
-                min="1"
-                value={adults}
-                onChange={(e) => setAdults(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
+        </section>
 
-              <input
-                type="number"
-                min="0"
-                value={children}
-                onChange={(e) => setChildren(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
+        {/* Exclusions */}
+        <section className="bg-white rounded-[28px] shadow-xl p-7 border border-red-100">
 
-            <select
-              value={packageType}
-              onChange={(e) => setPackageType(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2"
+          <h2 className="text-2xl font-bold text-red-500 mb-5">
+            ✖ Exclusions
+          </h2>
+
+          <ul className="space-y-4 text-gray-600">
+            <li className="flex items-start gap-3">
+              <span className="text-red-400">✕</span>
+              Airfare / Train tickets
+            </li>
+
+            <li className="flex items-start gap-3">
+              <span className="text-red-400">✕</span>
+              Personal expenses
+            </li>
+
+            <li className="flex items-start gap-3">
+              <span className="text-red-400">✕</span>
+              Entry tickets to monuments
+            </li>
+
+            <li className="flex items-start gap-3">
+              <span className="text-red-400">✕</span>
+              Travel insurance
+            </li>
+          </ul>
+
+        </section>
+
+      </div>
+
+      {/* Rate Card */}
+      <section className="bg-white rounded-[30px] shadow-xl p-8">
+
+        <h2 className="text-3xl font-bold text-gray-800 mb-8">
+          Rate Card
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+
+          {[
+            { type: "Standard", price: "₹14,999" },
+            { type: "Deluxe", price: "₹19,999" },
+            { type: "Luxury", price: "₹29,999" },
+          ].map((plan, i) => (
+            <div
+              key={i}
+              className="relative bg-gradient-to-b from-yellow-50 to-orange-50 rounded-3xl p-7 text-center border border-yellow-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
             >
-              <option>Standard</option>
-              <option>Deluxe</option>
-              <option>Luxury</option>
-            </select>
 
-            <div className="bg-yellow-50 p-4 rounded-xl text-center">
-              <p>Total Price</p>
-              <h4 className="text-2xl font-bold text-yellow-500">
-                ₹ {totalPrice.toLocaleString()}
-              </h4>
+              <div className="w-14 h-14 mx-auto rounded-full bg-yellow-400 text-white flex items-center justify-center text-2xl shadow-lg mb-4">
+                ✨
+              </div>
+
+              <h3 className="font-bold text-2xl text-gray-800">
+                {plan.type}
+              </h3>
+
+              <p className="text-4xl font-extrabold text-orange-500 mt-4">
+                {plan.price}
+              </p>
+
+              <button className="mt-6 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+                Choose Plan
+              </button>
+
             </div>
+          ))}
 
-            <button
-              onClick={sendWhatsApp}
-              className="w-full bg-green-500 text-white py-3 rounded-lg"
-            >
-              Enquire on WhatsApp
-            </button>
+        </div>
 
-            <button className="w-full bg-yellow-500 text-white py-3 rounded-lg">
-              Book Now
-            </button>
+      </section>
 
+    </div>
+
+    {/* RIGHT SIDEBAR */}
+    <div className="lg:col-span-1">
+
+      <div className="sticky top-28 bg-white/90 backdrop-blur-2xl rounded-[32px] shadow-2xl border border-white/50 p-8">
+
+        <h3 className="text-3xl font-bold text-gray-800 mb-2">
+          Book This Tour
+        </h3>
+
+        <p className="text-gray-500 mb-7">
+          Start planning your dream family vacation ✨
+        </p>
+
+        <div className="space-y-5">
+
+          {/* Inputs */}
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+
+          {/* Dates */}
+          <div className="grid grid-cols-2 gap-4">
+
+            <input
+              type="date"
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
+              className="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 outline-none"
+            />
+
+            <input
+              type="date"
+              min={fromDate}
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+              className="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 outline-none"
+            />
 
           </div>
+
+          {/* Guests */}
+          <div className="grid grid-cols-2 gap-4">
+
+            <input
+              type="number"
+              min="1"
+              value={adults}
+              onChange={(e) => setAdults(Number(e.target.value))}
+              className="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 outline-none"
+            />
+
+            <input
+              type="number"
+              min="0"
+              value={children}
+              onChange={(e) => setChildren(Number(e.target.value))}
+              className="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 outline-none"
+            />
+
+          </div>
+
+          {/* Package Type */}
+          <select
+            value={packageType}
+            onChange={(e) => setPackageType(e.target.value)}
+            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-3 outline-none"
+          >
+            <option>Standard</option>
+            <option>Deluxe</option>
+            <option>Luxury</option>
+          </select>
+
+          {/* Price Box */}
+          <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-6 rounded-3xl text-center text-white shadow-xl">
+
+            <p className="text-white/80 text-sm uppercase tracking-widest">
+              Total Price
+            </p>
+
+            <h4 className="text-4xl font-extrabold mt-2">
+              ₹ {totalPrice.toLocaleString()}
+            </h4>
+
+          </div>
+
+          {/* Buttons */}
+          <button
+            onClick={sendWhatsApp}
+            className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-semibold shadow-lg transition hover:scale-[1.02]"
+          >
+            Enquire on WhatsApp
+          </button>
+
+          <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 rounded-2xl font-semibold shadow-xl hover:scale-[1.02] transition">
+            Book Now
+          </button>
+
         </div>
 
       </div>
+
     </div>
+
+  </div>
+</div>
   );
 }

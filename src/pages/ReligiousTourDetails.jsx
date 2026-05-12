@@ -102,252 +102,343 @@ Total Price: ₹${totalPrice}`;
   if (!pkg) return <div className="pt-32 text-center">Package Not Found</div>;
 
   return (
-    <div className="pt-24 bg-gray-50">
-      {/* Banner */}
-      <div className="relative h-[420px]">
-        <img
-          src={pkg.image}
-          alt={pkg.title}
-          className="w-full h-full object-cover"
-        />
+    <div className="pt-0 bg-gradient-to-b from-orange-50 via-white to-amber-50 min-h-screen overflow-hidden">
 
-        <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-bold">{pkg.title}</h1>
-          <p className="mt-3">{pkg.duration}</p>
+  {/* Hero Banner */}
+  <div className="relative h-[500px] rounded-b-[50px] overflow-hidden shadow-2xl">
+
+    <img
+      src={pkg.image}
+      alt={pkg.title}
+      className="w-full h-full object-cover scale-105 hover:scale-110 transition duration-700"
+    />
+
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+
+    {/* Floating Glow */}
+    <div className="absolute top-10 left-10 w-40 h-40 bg-orange-400/30 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-10 right-10 w-52 h-52 bg-yellow-300/20 rounded-full blur-3xl"></div>
+
+    {/* Content */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-10">
+
+      <p className="uppercase tracking-[6px] text-orange-200 text-sm mb-4">
+        Divine Journey ✨
+      </p>
+
+      <h1 className="text-5xl md:text-7xl font-bold font-serif text-white drop-shadow-2xl">
+        {pkg.title}
+      </h1>
+
+      <p className="mt-5 text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed">
+        Experience peace, spirituality, and sacred destinations with our
+        carefully curated religious tour package.
+      </p>
+
+      <div className="mt-8 flex gap-4 flex-wrap justify-center">
+        <div className="bg-white/15 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 text-white">
+          🕉️ Spiritual Experience
+        </div>
+
+        <div className="bg-white/15 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 text-white">
+          📍 {pkg.duration}
         </div>
       </div>
 
-      {/* Content + Sidebar */}
-      <div className="max-w-7xl mx-auto px-6 py-14 grid lg:grid-cols-3 gap-10">
+    </div>
+  </div>
 
-        {/* LEFT CONTENT */}
-        <div className="lg:col-span-2 space-y-12">
+  {/* Main Layout */}
+  <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-3 gap-10">
 
-          {/* Overview */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Overview</h2>
-            <p className="text-gray-600">{pkg.overview}</p>
-          </section>
+    {/* LEFT CONTENT */}
+    <div className="lg:col-span-2 space-y-12">
 
-          {/* Tour Itinerary */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Tour Itinerary</h2>
+      {/* Overview */}
+      <section className="bg-white rounded-3xl p-8 shadow-lg border border-orange-100">
+        <h2 className="text-3xl font-bold font-serif text-gray-800 mb-5 flex items-center gap-3">
+          🛕 Overview
+        </h2>
 
-            <div className="space-y-4">
-              {itinerary.map((day, i) => (
-                <div key={i} className="bg-white rounded-xl shadow">
-
-                  {/* HEADER */}
-                  <button
-                    onClick={() =>
-                      setOpenDay(openDay === i ? null : i)
-                    }
-                    className="w-full text-left p-5 flex justify-between items-center"
-                  >
-                    <h3 className="font-semibold">
-                      Day {i + 1}
-                    </h3>
-
-                    <span className="text-xl font-bold text-orange-500">
-                      {openDay === i ? "-" : "+"}
-                    </span>
-                  </button>
-
-                  {/* CONTENT */}
-                  {openDay === i && (
-                    <div className="px-5 pb-5 text-gray-600 text-sm">
-                      <p className="font-medium mb-1">{day.title}</p>
-                      <p>{day.details}</p>
-                    </div>
-                  )}
-
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Inclusions */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Inclusions</h2>
-            <ul className="list-disc pl-6 space-y-2 text-gray-600">
-              <li>Hotel accommodation with breakfast & dinner</li>
-              <li>Private transportation</li>
-              <li>Sightseeing as per itinerary</li>
-              <li>All toll taxes & parking</li>
-            </ul>
-          </section>
-
-          {/* Exclusions */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Exclusions</h2>
-            <ul className="list-disc pl-6 space-y-2 text-gray-600">
-              <li>Airfare / Train tickets</li>
-              <li>Personal expenses</li>
-              <li>Entry tickets to monuments</li>
-              <li>Travel insurance</li>
-            </ul>
-          </section>
-
-          {/* Rate Card */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Rate Card</h2>
-
-  <div className="grid md:grid-cols-3 gap-6">
-    {[
-      { type: "Standard", price: "₹14,999" },
-      { type: "Deluxe", price: "₹19,999" },
-      { type: "Luxury", price: "₹29,999" },
-    ].map((plan, i) => (
-      <div
-        key={i}
-        className="bg-white rounded-xl shadow p-6 text-center"
-      >
-        <h3 className="font-bold text-lg">{plan.type}</h3>
-
-        <p className="text-2xl text-orange-500 font-bold mt-2">
-          {plan.price}
+        <p className="text-gray-600 leading-8 text-lg">
+          {pkg.overview}
         </p>
+      </section>
+
+      {/* Itinerary */}
+      <section className="bg-white rounded-3xl p-8 shadow-lg border border-orange-100">
+
+        <h2 className="text-3xl font-bold font-serif text-gray-800 mb-6 flex items-center gap-3">
+          📜 Tour Itinerary
+        </h2>
+
+        <div className="space-y-5">
+
+          {itinerary.map((day, i) => (
+            <div
+              key={i}
+              className="rounded-2xl overflow-hidden border border-orange-100 shadow-sm hover:shadow-lg transition"
+            >
+
+              {/* Header */}
+              <button
+                onClick={() =>
+                  setOpenDay(openDay === i ? null : i)
+                }
+                className="w-full bg-gradient-to-r from-orange-50 to-amber-50 px-6 py-5 flex justify-between items-center"
+              >
+
+                <div className="text-left">
+                  <p className="text-sm text-orange-500 font-medium">
+                    Day {i + 1}
+                  </p>
+
+                  <h3 className="font-bold text-lg text-gray-800">
+                    {day.title}
+                  </h3>
+                </div>
+
+                <div className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center text-xl">
+                  {openDay === i ? "−" : "+"}
+                </div>
+
+              </button>
+
+              {/* Content */}
+              {openDay === i && (
+                <div className="px-6 pb-6 pt-2 text-gray-600 leading-7 bg-white">
+                  {day.details}
+                </div>
+              )}
+
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      {/* Inclusions & Exclusions */}
+      <div className="grid md:grid-cols-2 gap-8">
+
+        {/* Inclusions */}
+        <section className="bg-white rounded-3xl p-8 shadow-lg border border-green-100">
+
+          <h2 className="text-2xl font-bold text-green-600 mb-5">
+            ✅ Inclusions
+          </h2>
+
+          <ul className="space-y-4 text-gray-600">
+            <li>🏨 Hotel accommodation with meals</li>
+            <li>🚘 Comfortable transportation</li>
+            <li>🛕 Temple & sightseeing visits</li>
+            <li>🧾 Toll taxes & parking charges</li>
+          </ul>
+
+        </section>
+
+        {/* Exclusions */}
+        <section className="bg-white rounded-3xl p-8 shadow-lg border border-red-100">
+
+          <h2 className="text-2xl font-bold text-red-500 mb-5">
+            ❌ Exclusions
+          </h2>
+
+          <ul className="space-y-4 text-gray-600">
+            <li>✈️ Airfare / Train tickets</li>
+            <li>💸 Personal expenses</li>
+            <li>🎟️ Monument entry tickets</li>
+            <li>🛡️ Travel insurance</li>
+          </ul>
+
+        </section>
+
       </div>
-    ))}
-  </div>
-</section>
 
-{/* Payment Terms */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Payment Terms</h2>
+      {/* Rate Card */}
+      <section className="bg-white rounded-3xl p-8 shadow-lg border border-orange-100">
 
-  <p className="text-gray-600">
-    30% advance required at booking confirmation. Remaining balance
-    payable before departure.
-  </p>
-</section>
+        <h2 className="text-3xl font-bold font-serif mb-8 text-gray-800">
+          💰 Rate Card
+        </h2>
 
-{/* Cancellation Policy */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">
-    Cancellation & Refund Policy
-  </h2>
+        <div className="grid md:grid-cols-3 gap-6">
 
-  <p className="text-gray-600">
-    Cancellation charges depend on the time before departure.
-    Refund processed within 7–10 working days.
-  </p>
-</section>
+          {[
+            { type: "Standard", price: "₹14,999" },
+            { type: "Deluxe", price: "₹19,999" },
+            { type: "Luxury", price: "₹29,999" },
+          ].map((plan, i) => (
+            <div
+              key={i}
+              className="rounded-3xl p-8 text-center bg-gradient-to-b from-orange-50 to-white border border-orange-100 hover:-translate-y-2 hover:shadow-xl transition duration-300"
+            >
 
-{/* Packages by Theme */}
-<section>
-  <h2 className="text-2xl font-bold mb-4">Packages by Theme</h2>
+              <h3 className="text-2xl font-bold text-gray-800">
+                {plan.type}
+              </h3>
 
-  <div className="grid md:grid-cols-2 gap-6">
-    <ul className="list-disc pl-6 text-gray-600 space-y-2">
-      <li>Honeymoon Special</li>
-      <li>Family Friendly</li>
-      <li>Adventure Tour</li>
-    </ul>
+              <p className="text-4xl font-bold text-orange-500 mt-4">
+                {plan.price}
+              </p>
 
-    <ul className="list-disc pl-6 text-gray-600 space-y-2">
-      <li>Luxury Experience</li>
-      <li>Budget Package</li>
-      <li>Group Tour</li>
-    </ul>
-  </div>
-</section>
+              <button className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full transition">
+                Choose Plan
+              </button>
+
+            </div>
+          ))}
 
         </div>
 
-        {/* RIGHT SIDEBAR */}
-        <div className="lg:col-span-1">
+      </section>
 
-          <h3 className="text-xl font-bold mb-4">Book This Tour</h3>
+      {/* Policies */}
+      <section className="bg-white rounded-3xl p-8 shadow-lg border border-orange-100 space-y-8">
 
-          <div className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold font-serif mb-3 text-gray-800">
+            💳 Payment Terms
+          </h2>
+
+          <p className="text-gray-600 leading-7">
+            30% advance payment is required at the time of booking.
+            Remaining balance must be cleared before departure.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold font-serif mb-3 text-gray-800">
+            🔄 Cancellation Policy
+          </h2>
+
+          <p className="text-gray-600 leading-7">
+            Cancellation charges vary depending on the departure date.
+            Refunds are processed within 7–10 working days.
+          </p>
+        </div>
+
+      </section>
+
+    </div>
+
+    {/* RIGHT SIDEBAR */}
+    <div className="lg:sticky lg:top-28 h-fit">
+
+      <div className="bg-white rounded-3xl shadow-2xl p-8 border border-orange-100">
+
+        <h3 className="text-3xl font-bold font-serif text-gray-800 mb-2">
+          Book This Tour ✨
+        </h3>
+
+        <p className="text-gray-500 mb-6">
+          Begin your spiritual journey with us.
+        </p>
+
+        <div className="space-y-5">
+
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-orange-400 outline-none"
+          />
+
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-orange-400 outline-none"
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            className="w-full border border-gray-200 rounded-2xl px-4 py-3 focus:ring-2 focus:ring-orange-400 outline-none"
+          />
+
+          {/* Dates */}
+          <div className="grid grid-cols-2 gap-3">
 
             <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full border rounded-lg px-3 py-2"
+              type="date"
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
+              className="border border-gray-200 rounded-2xl px-3 py-3"
             />
 
             <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full border rounded-lg px-3 py-2"
+              type="date"
+              min={fromDate}
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+              className="border border-gray-200 rounded-2xl px-3 py-3"
             />
-
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border rounded-lg px-3 py-2"
-            />
-
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
-
-              <input
-                type="date"
-                min={fromDate}
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="number"
-                min="1"
-                value={adults}
-                onChange={(e) => setAdults(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
-
-              <input
-                type="number"
-                min="0"
-                value={children}
-                onChange={(e) => setChildren(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
-
-            <select
-              value={packageType}
-              onChange={(e) => setPackageType(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2"
-            >
-              <option>Standard</option>
-              <option>Deluxe</option>
-              <option>Luxury</option>
-            </select>
-
-            <div className="bg-orange-50 p-4 rounded-xl text-center">
-              <p>Total Price</p>
-              <h4 className="text-2xl font-bold text-orange-500">
-                ₹ {totalPrice.toLocaleString()}
-              </h4>
-            </div>
-
-            <button
-              onClick={sendWhatsApp}
-              className="w-full bg-green-500 text-white py-3 rounded-lg"
-            >
-              Enquire on WhatsApp
-            </button>
-
-            <button className="w-full bg-blue-500 text-white py-3 rounded-lg">
-              Book Now
-            </button>
-
 
           </div>
+
+          {/* Guests */}
+          <div className="grid grid-cols-2 gap-3">
+
+            <input
+              type="number"
+              min="1"
+              value={adults}
+              onChange={(e) => setAdults(Number(e.target.value))}
+              className="border border-gray-200 rounded-2xl px-3 py-3"
+            />
+
+            <input
+              type="number"
+              min="0"
+              value={children}
+              onChange={(e) => setChildren(Number(e.target.value))}
+              className="border border-gray-200 rounded-2xl px-3 py-3"
+            />
+
+          </div>
+
+          {/* Package Type */}
+          <select
+            value={packageType}
+            onChange={(e) => setPackageType(e.target.value)}
+            className="w-full border border-gray-200 rounded-2xl px-4 py-3"
+          >
+            <option>Standard</option>
+            <option>Deluxe</option>
+            <option>Luxury</option>
+          </select>
+
+          {/* Total Price */}
+          <div className="bg-gradient-to-r from-orange-100 to-amber-50 p-6 rounded-3xl text-center border border-orange-200">
+
+            <p className="text-gray-600">
+              Total Price
+            </p>
+
+            <h4 className="text-4xl font-bold text-orange-500 mt-2">
+              ₹ {totalPrice.toLocaleString()}
+            </h4>
+
+          </div>
+
+          {/* Buttons */}
+          <button
+            onClick={sendWhatsApp}
+            className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-green-300 transition"
+          >
+            WhatsApp Enquiry
+          </button>
+
+          <button className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-4 rounded-2xl font-semibold shadow-lg hover:shadow-orange-300 transition">
+            Book Now
+          </button>
+
         </div>
 
       </div>
+
     </div>
+
+  </div>
+</div>
   );
 }

@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, User } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdown, setDropdown] = useState(null);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileDropdown, setMobileDropdown] = useState(false);
   const [mobileServices, setMobileServices] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const [profileOpen, setProfileOpen] = useState(false); // ✅ profile state
+  const location = useLocation();
 
   const timeoutRef = useRef(null);
   const profileRef = useRef(null); // ✅ ref for outside click
@@ -25,6 +29,26 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
+
+  useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > lastScrollY) {
+      // scrolling down
+      setShowNavbar(false);
+    } else {
+      // scrolling up
+      setShowNavbar(true);
+    }
+
+    setLastScrollY(window.scrollY);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [lastScrollY]);
 
   // Close profile dropdown when clicking outside
   useEffect(() => {
@@ -57,11 +81,15 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5"
-            : "bg-transparent py-5"
-        }`}
+        className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
+            showNavbar ? "translate-y-0" : "-translate-y-full"
+          } ${
+            location.pathname !== "/"
+              ? "bg-black/70 backdrop-blur-xl border-b border-white/10 py-3"
+              : scrolled
+              ? "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5"
+              : "bg-transparent py-5"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
 
@@ -70,7 +98,7 @@ export default function Navbar() {
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className={`font-serif text-2xl ${
-              scrolled ? "text-black" : "text-white"
+              scrolled ? "text-white" : "text-white"
             }`}
           >
             Alshi<span className="text-orange-500 text-terracotta">fa</span>
@@ -79,11 +107,11 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center space-x-8 font-medium text-sm">
 
-            <Link to="/virtual-tour" className={scrolled ? "text-black" : "text-white"}>
+            <Link to="/virtual-tour" className={scrolled ? "text-white" : "text-white"}>
               Virtual Tour
             </Link>
 
-            <Link to="/about" className={scrolled ? "text-black" : "text-white"}>
+            <Link to="/about" className={scrolled ? "text-white" : "text-white"}>
               About
             </Link>
 
@@ -93,7 +121,7 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter("packages")}
               onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 text-white">
+              <button className={`${scrolled ? "text-white" : "text-white"} flex items-center gap-1`}>
                 Packages <ChevronDown size={18} />
               </button>
 
@@ -117,7 +145,7 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter("services")}
               onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 text-white">
+              <button className={`${scrolled ? "text-white" : "text-white"} flex items-center gap-1`}>
                 Services <ChevronDown size={18} />
               </button>
 
@@ -130,7 +158,7 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link to="/contact" className="text-white">
+            <Link to="/contact" className={`${scrolled ? "text-white" : "text-white"}`}>
               Contact
             </Link>
           </ul>
@@ -140,14 +168,14 @@ export default function Navbar() {
 
             <Link
               to="/login"
-              className="px-4 py-2 text-white rounded-sm border border-gray-300 hover:bg-gray-100"
+              className={`${scrolled ? "text-white" : "text-white"} px-4 py-2 rounded-sm border border-gray-300 hover:bg-gray-100`}
             >
               Login
             </Link>
 
             <Link
               to="/signup"
-              className="px-5 py-2 rounded-sm bg-white text-black hover:bg-blue-100"
+              className={`${scrolled ? "text-black" : "text-black"} px-5 py-2 rounded-sm bg-white hover:bg-blue-100`}
             >
               Sign Up
             </Link>
