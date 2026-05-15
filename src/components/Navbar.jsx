@@ -85,9 +85,9 @@ export default function Navbar() {
             showNavbar ? "translate-y-0" : "-translate-y-full"
           } ${
             location.pathname !== "/"
-              ? "bg-black/70 backdrop-blur-xl border-b border-white/10 py-3"
+              ? "bg-black/70 backdrop-blur-xl border-b border-white/10 py-5"
               : scrolled
-              ? "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5"
+              ? "bg-black/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5 py-5"
               : "bg-transparent py-5"
           }`}
       >
@@ -128,7 +128,7 @@ export default function Navbar() {
               <div className="absolute top-full left-0 w-full h-4"></div>
 
               {dropdown === "packages" && (
-                <div className="absolute top-full left-0 mt-2 bg-transparent text-white shadow-xl rounded-2xl p-6 w-[520px] grid grid-cols-2 gap-4 z-50">
+                <div className="absolute top-full left-0 mt-2 bg-black/40 text-white shadow-xl rounded-2xl p-10 w-[520px] grid grid-cols-2 gap-4 z-50">
                   <Link to="/domestic-tours">Domestic Tours</Link>
                   <Link to="/international-tours">International Tours</Link>
                   <Link to="/honeymoon">Honeymoon Packages</Link>
@@ -150,7 +150,7 @@ export default function Navbar() {
               </button>
 
               {dropdown === "services" && (
-                <div className="absolute top-full left-0 mt-2 bg-transparent text-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
+                <div className="absolute top-full left-0 mt-2 bg-black/40 text-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
                   <Link to="/flight-booking">Ticket Booking</Link>
                   <Link to="/hotel-booking">Hotel Booking</Link>
                   <Link to="/visa-services">Visa Services</Link>

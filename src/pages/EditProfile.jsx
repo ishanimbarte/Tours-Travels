@@ -1,83 +1,76 @@
 import React, { useState, useEffect } from "react";
 import { Camera } from "lucide-react";
-import { getProfile } from "../api/api";
 
 export default function EditProfile() {
   const [form, setForm] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "9876543210",
+    name: "",
+    email: "",
+    phone: "",
     password: "",
     photo: null,
   });
+
   const [user, setUser] = useState(null);
 
+  // Load user from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      setUser(storedUser);
+
+      setForm({
+        name: storedUser.name || "",
+        email: storedUser.email || "",
+        phone: storedUser.phone || "",
+        password: "",
+        photo: storedUser.photo || null,
+      });
+    }
+  }, []);
+
+  // Handle input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle photo upload
   const handlePhoto = (e) => {
     if (e.target.files[0]) {
-      setForm({ ...form, photo: URL.createObjectURL(e.target.files[0]) });
-    }
-  };
-
-  useEffect(() => {
-  const fetchProfile = async () => {
-    try {
-      const data = await getProfile();
-      setUser(data);
+      const photoURL = URL.createObjectURL(e.target.files[0]);
 
       setForm({
-        name: data.name || "",
-        email: data.email || "",
-        phone: data.phone || "",
-        password: "",
-        photo: data.photo || null
+        ...form,
+        photo: photoURL,
       });
-
-    } catch (error) {
-      console.error("Profile fetch error:", error);
     }
   };
 
-  fetchProfile();
-}, []);
-
+  // Save updated profile
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const updatedUser = {
+      ...user,
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      photo: form.photo,
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    setUser(updatedUser);
+
     alert("Profile Updated Successfully ✅");
   };
 
   return (
     <div className="min-h-screen pt-28 pb-16 px-4 bg-gradient-to-br from-blue-100 via-white to-orange-100 flex items-center justify-center">
-      
+
       <div className="w-full max-w-3xl bg-white/70 backdrop-blur-xl shadow-2xl rounded-3xl p-8 md:p-10 border border-white/40">
 
-      {user && (
-  <div className="flex items-center gap-4 mb-8 p-4 bg-white rounded-2xl shadow-md">
-    
-    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-      {user.photo ? (
-        <img
-          src={`https://tours-travels-backend-production.up.railway.app/${user.photo}`}
-          alt="profile"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-500">
-          👤
-        </div>
-      )}
-    </div>
-
-    <div>
-      <h3 className="text-lg font-semibold">{user.name}</h3>
-      <p className="text-gray-500 text-sm">{user.email}</p>
-    </div>
-
-  </div>
-)}
+        
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center mb-8">
@@ -89,6 +82,7 @@ export default function EditProfile() {
           {/* Profile Photo */}
           <div className="flex flex-col items-center">
             <div className="relative group">
+
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 {form.photo ? (
                   <img
@@ -103,9 +97,10 @@ export default function EditProfile() {
                 )}
               </div>
 
-              {/* Overlay */}
+              {/* Camera Button */}
               <label className="absolute bottom-2 right-2 bg-blue-600 text-white p-2 rounded-full cursor-pointer shadow-lg hover:bg-blue-700 transition">
                 <Camera size={18} />
+
                 <input
                   type="file"
                   accept="image/*"
@@ -113,6 +108,7 @@ export default function EditProfile() {
                   className="hidden"
                 />
               </label>
+
             </div>
 
             <p className="text-sm text-gray-500 mt-3">
@@ -120,12 +116,15 @@ export default function EditProfile() {
             </p>
           </div>
 
-          {/* Inputs Grid */}
+          {/* Inputs */}
           <div className="grid md:grid-cols-2 gap-6">
 
             {/* Name */}
             <div>
-              <label className="text-sm text-gray-600">Full Name</label>
+              <label className="text-sm text-gray-600">
+                Full Name
+              </label>
+
               <input
                 type="text"
                 name="name"
@@ -137,7 +136,10 @@ export default function EditProfile() {
 
             {/* Email */}
             <div>
-              <label className="text-sm text-gray-600">Email</label>
+              <label className="text-sm text-gray-600">
+                Email
+              </label>
+
               <input
                 type="email"
                 name="email"
@@ -149,7 +151,10 @@ export default function EditProfile() {
 
             {/* Phone */}
             <div>
-              <label className="text-sm text-gray-600">Phone</label>
+              <label className="text-sm text-gray-600">
+                Phone
+              </label>
+
               <input
                 type="tel"
                 name="phone"
@@ -161,7 +166,10 @@ export default function EditProfile() {
 
             {/* Password */}
             <div>
-              <label className="text-sm text-gray-600">New Password</label>
+              <label className="text-sm text-gray-600">
+                New Password
+              </label>
+
               <input
                 type="password"
                 name="password"
@@ -174,7 +182,7 @@ export default function EditProfile() {
 
           </div>
 
-          {/* Buttons */}
+          {/* Button */}
           <div className="flex justify-center pt-6">
             <button
               type="submit"
