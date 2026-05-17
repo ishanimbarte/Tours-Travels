@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import PopularPackages from "./components/PopularPackages";
@@ -6,14 +8,10 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import TopDestinations from "./components/TopDestinations";
 import Packages from "./components/Packages";
 import Testimonials from "./components/Testimonials";
-// import Services from "./components/Services";
 import CTA from "./components/CTA";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-
-
-
-
+import IntroLoader from "./components/IntroLoader";
 
 import PackageDetails from "./pages/PackageDetails";
 import TopDestinationsDetails from "./pages/TopDestinationsDetails";
@@ -38,6 +36,21 @@ import VirtualTour from "./pages/VirtualTour";
 import EditProfile from "./pages/EditProfile";
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <IntroLoader />;
+  }
+
   return (
     <Router>
 
@@ -45,6 +58,7 @@ function App() {
       <Navbar />
 
       <Routes>
+
         <Route
           path="/"
           element={
@@ -56,7 +70,6 @@ function App() {
               <Packages />
               <Testimonials />
               <CTA />
-              
             </>
           }
         />
@@ -69,23 +82,34 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/domestic/:id" element={<DomesticTourDetails />} />
         <Route path="/international-tours" element={<InternationalTours />} />
-        <Route path="/international-tours/:id" element={<InternationalTourDetails />} />
+        <Route
+          path="/international-tours/:id"
+          element={<InternationalTourDetails />}
+        />
         <Route path="/honeymoon" element={<HoneymoonPackages />} />
         <Route path="/honeymoon/:id" element={<HoneymoonTourDetails />} />
         <Route path="/family-tours" element={<FamilyTours />} />
         <Route path="/family-tours/:id" element={<FamilyTourDetails />} />
         <Route path="/adventure-tours" element={<AdventureTours />} />
-        <Route path="/adventure-tours/:id" element={<AdventureTourDetails />} />
+        <Route
+          path="/adventure-tours/:id"
+          element={<AdventureTourDetails />}
+        />
         <Route path="/religious-tours" element={<ReligiousTours />} />
-        <Route path="/religious-tours/:id" element={<ReligiousTourDetails />} />
+        <Route
+          path="/religious-tours/:id"
+          element={<ReligiousTourDetails />}
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/virtual-tour" element={<VirtualTour />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+
       </Routes>
 
       <Footer />
+
     </Router>
   );
 }

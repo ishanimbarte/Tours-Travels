@@ -73,6 +73,9 @@ export default function OurPackagesDetails() {
   const [name, setName] = useState("");
 const [email, setEmail] = useState("");
 const [phone, setPhone] = useState("");
+const [pickupCity, setPickupCity] = useState("");
+const [dropCity, setDropCity] = useState("");
+const [accommodation, setAccommodation] = useState("");
 
   const [showBookingPage, setShowBookingPage] = useState(false);
 
@@ -299,124 +302,239 @@ Total Price: ₹${totalPrice}`;
   {/* Add these states at top with other useState */}
   
   <form
-    onSubmit={(e) => {
-      e.preventDefault();
-      setShowBookingPage(true);
-    }}
-    className="space-y-4"
-  >
+  onSubmit={(e) => {
+    e.preventDefault();
+    setShowBookingPage(true);
+  }}
+  className="space-y-5"
+>
 
-    <input
-      type="text"
-      placeholder="Your Name"
-      required
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      className="w-full border rounded-lg px-3 py-2"
-    />
+  {/* PERSONAL DETAILS */}
+  <div>
 
-    <input
-      type="email"
-      placeholder="Your Email"
-      required
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      className="w-full border rounded-lg px-3 py-2"
-    />
+    <h4 className="text-lg font-semibold mb-4">
+      Personal Details
+    </h4>
 
-    <input
-      type="tel"
-      placeholder="Phone Number"
-      required
-      value={phone}
-      onChange={(e) => setPhone(e.target.value)}
-      className="w-full border rounded-lg px-3 py-2"
-    />
-
-    <div className="grid grid-cols-2 gap-3">
+    <div className="space-y-4">
 
       <input
-        type="date"
-        value={fromDate}
+        type="text"
+        placeholder="Your Name"
         required
-        onChange={(e) => setFromDate(e.target.value)}
-        className="border rounded-lg px-3 py-2"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-full border rounded-xl px-4 py-3"
       />
 
       <input
-        type="date"
-        min={fromDate}
-        value={toDate}
+        type="email"
+        placeholder="Your Email"
         required
-        onChange={(e) => setToDate(e.target.value)}
-        className="border rounded-lg px-3 py-2"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full border rounded-xl px-4 py-3"
+      />
+
+      <input
+        type="tel"
+        placeholder="Phone Number"
+        required
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        className="w-full border rounded-xl px-4 py-3"
       />
 
     </div>
 
-    <div className="grid grid-cols-2 gap-3">
+  </div>
 
-      <input
-        type="number"
-        min="1"
-        required
-        value={adults}
-        onChange={(e) => setAdults(Number(e.target.value))}
-        className="border rounded-lg px-3 py-2"
-      />
+  {/* TRIP DETAILS */}
+  <div className="border-t pt-5">
 
-      <input
-        type="number"
-        min="0"
-        value={children}
-        onChange={(e) => setChildren(Number(e.target.value))}
-        className="border rounded-lg px-3 py-2"
-      />
+    <h4 className="text-lg font-semibold mb-4">
+      Trip Details
+    </h4>
+
+    <div className="space-y-4">
+
+      {/* Tour Dates */}
+      <div className="grid grid-cols-2 gap-3">
+
+        <div>
+          <label className="text-sm text-gray-500">
+            Tour Start Date
+          </label>
+
+          <input
+            type="date"
+            required
+            value={fromDate}
+            onChange={(e) => setFromDate(e.target.value)}
+            className="w-full border rounded-xl px-4 py-3 mt-1"
+          />
+        </div>
+
+        <div>
+          <label className="text-sm text-gray-500">
+            Tour End Date
+          </label>
+
+          <input
+            type="date"
+            min={fromDate}
+            required
+            value={toDate}
+            onChange={(e) => setToDate(e.target.value)}
+            className="w-full border rounded-xl px-4 py-3 mt-1"
+          />
+        </div>
+
+      </div>
+
+      {/* Pickup & Drop */}
+      <div className="grid grid-cols-2 gap-3">
+
+        <input
+          type="text"
+          placeholder="Pickup City"
+          required
+          value={pickupCity}
+          onChange={(e) => setPickupCity(e.target.value)}
+          className="border rounded-xl px-4 py-3"
+        />
+
+        <input
+          type="text"
+          placeholder="Drop City"
+          required
+          value={dropCity}
+          onChange={(e) => setDropCity(e.target.value)}
+          className="border rounded-xl px-4 py-3"
+        />
+
+      </div>
+
+      {/* Travellers */}
+      <div className="grid grid-cols-2 gap-3">
+
+        <div>
+          <label className="text-sm text-gray-500">
+            Adults
+          </label>
+
+          <input
+            type="number"
+            min="1"
+            required
+            value={adults}
+            onChange={(e) => setAdults(Number(e.target.value))}
+            className="w-full border rounded-xl px-4 py-3 mt-1"
+          />
+        </div>
+
+        <div>
+          <label className="text-sm text-gray-500">
+            Children
+          </label>
+
+          <input
+            type="number"
+            min="0"
+            value={children}
+            onChange={(e) => setChildren(Number(e.target.value))}
+            className="w-full border rounded-xl px-4 py-3 mt-1"
+          />
+        </div>
+
+      </div>
+
+      {/* Accommodation */}
+      <div>
+
+        <label className="text-sm text-gray-500">
+          Accommodation Type
+        </label>
+
+        <select
+          value={accommodation}
+          required
+          onChange={(e) => setAccommodation(e.target.value)}
+          className="w-full border rounded-xl px-4 py-3 mt-1"
+        >
+          <option value="">Select Accommodation</option>
+          <option>3 Star Hotel</option>
+          <option>4 Star Hotel</option>
+          <option>5 Star Luxury Hotel</option>
+          <option>Resort Stay</option>
+          <option>Villa / Cottage</option>
+        </select>
+
+      </div>
+
+      {/* Package Type */}
+      <div>
+
+        <label className="text-sm text-gray-500">
+          Package Type
+        </label>
+
+        <select
+          value={packageType}
+          required
+          onChange={(e) => setPackageType(e.target.value)}
+          className="w-full border rounded-xl px-4 py-3 mt-1"
+        >
+          <option>Standard</option>
+          <option>Deluxe</option>
+          <option>Luxury</option>
+        </select>
+
+      </div>
 
     </div>
 
-    <select
-      value={packageType}
-      required
-      onChange={(e) => setPackageType(e.target.value)}
-      className="w-full border rounded-lg px-3 py-2"
-    >
-      <option>Standard</option>
-      <option>Deluxe</option>
-      <option>Luxury</option>
-    </select>
+  </div>
 
-    <div className="bg-orange-50 p-4 rounded-xl text-center">
+  {/* PRICE */}
+  <div className="bg-orange-50 p-5 rounded-2xl text-center">
 
-      <p>Total Price</p>
+    <p className="text-gray-600">
+      Total Package Price
+    </p>
 
-      <h4 className="text-2xl font-bold text-orange-500">
-        ₹ {totalPrice.toLocaleString()}
-      </h4>
+    <h4 className="text-3xl font-bold text-orange-500 mt-2">
+      ₹ {totalPrice.toLocaleString()}
+    </h4>
 
-    </div>
+  </div>
+
+  {/* BUTTONS */}
+  <div className="space-y-3">
 
     <button
       type="button"
       onClick={sendWhatsApp}
-      className="w-full bg-green-500 text-white py-3 rounded-lg"
+      className="w-full bg-green-500 hover:bg-green-600 transition text-white py-3 rounded-xl font-semibold"
     >
       Enquire on WhatsApp
     </button>
 
     <button
       type="submit"
-      className="w-full bg-blue-500 hover:bg-blue-600 transition text-white py-3 rounded-lg font-semibold"
+      className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:opacity-90 transition text-white py-3 rounded-xl font-semibold"
     >
       Book Now
     </button>
 
-  </form>
+  </div>
+
+</form>
 </div>
 
 {/* BOOKING POPUP */}
 {showBookingPage && (
-  <div className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center p-4 overflow-y-auto">
+  <div className="fixed inset-0 bg-black/60 z-50 pt-48 flex justify-center items-center p-4 overflow-y-auto">
 
     <div className="bg-white max-w-2xl w-full rounded-3xl shadow-2xl p-8 relative animate-fadeIn">
 

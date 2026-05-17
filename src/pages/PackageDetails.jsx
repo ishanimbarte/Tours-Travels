@@ -112,7 +112,7 @@ Total Price: ₹${totalPrice}`;
   if (!pkg) return <div className="pt-32 text-center">Package Not Found</div>;
 
   return (
-    <div className="pt-24 bg-gray-50">
+    <div className="pt-0 bg-gray-50">
       {/* Banner */}
       <div className="relative h-[420px]">
         <img
