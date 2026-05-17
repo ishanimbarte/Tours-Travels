@@ -70,6 +70,12 @@ export default function OurPackagesDetails() {
   const [children, setChildren] = useState(0);
   const [packageType, setPackageType] = useState("Standard");
 
+  const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [phone, setPhone] = useState("");
+
+  const [showBookingPage, setShowBookingPage] = useState(false);
+
   // ✅ NEW STATE FOR ITINERARY DROPDOWN
   const [openDay, setOpenDay] = useState(null);
 
@@ -131,7 +137,7 @@ Total Price: ₹${totalPrice}`;
   if (!pkg) return <div className="pt-32 text-center">Package Not Found</div>;
 
   return (
-    <div className="pt-24 bg-gray-50">
+    <div className="pt-0 bg-gray-50">
       {/* Banner */}
       <div className="relative h-[420px]">
         <img
@@ -285,96 +291,241 @@ Total Price: ₹${totalPrice}`;
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="lg:col-span-1">
+<div className="lg:col-span-1">
 
-          <h3 className="text-xl font-bold mb-4">Book This Tour</h3>
+  <h3 className="text-xl font-bold mb-4">Book This Tour</h3>
 
-          <div className="space-y-4">
+  {/* NEW STATES */}
+  {/* Add these states at top with other useState */}
+  
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      setShowBookingPage(true);
+    }}
+    className="space-y-4"
+  >
 
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+    <input
+      type="text"
+      placeholder="Your Name"
+      required
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      className="w-full border rounded-lg px-3 py-2"
+    />
 
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+    <input
+      type="email"
+      placeholder="Your Email"
+      required
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="w-full border rounded-lg px-3 py-2"
+    />
 
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border rounded-lg px-3 py-2"
-            />
+    <input
+      type="tel"
+      placeholder="Phone Number"
+      required
+      value={phone}
+      onChange={(e) => setPhone(e.target.value)}
+      className="w-full border rounded-lg px-3 py-2"
+    />
 
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
+    <div className="grid grid-cols-2 gap-3">
 
-              <input
-                type="date"
-                min={fromDate}
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
+      <input
+        type="date"
+        value={fromDate}
+        required
+        onChange={(e) => setFromDate(e.target.value)}
+        className="border rounded-lg px-3 py-2"
+      />
 
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="number"
-                min="1"
-                value={adults}
-                onChange={(e) => setAdults(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
+      <input
+        type="date"
+        min={fromDate}
+        value={toDate}
+        required
+        onChange={(e) => setToDate(e.target.value)}
+        className="border rounded-lg px-3 py-2"
+      />
 
-              <input
-                type="number"
-                min="0"
-                value={children}
-                onChange={(e) => setChildren(Number(e.target.value))}
-                className="border rounded-lg px-3 py-2"
-              />
-            </div>
+    </div>
 
-            <select
-              value={packageType}
-              onChange={(e) => setPackageType(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2"
-            >
-              <option>Standard</option>
-              <option>Deluxe</option>
-              <option>Luxury</option>
-            </select>
+    <div className="grid grid-cols-2 gap-3">
 
-            <div className="bg-orange-50 p-4 rounded-xl text-center">
-              <p>Total Price</p>
-              <h4 className="text-2xl font-bold text-orange-500">
-                ₹ {totalPrice.toLocaleString()}
-              </h4>
-            </div>
+      <input
+        type="number"
+        min="1"
+        required
+        value={adults}
+        onChange={(e) => setAdults(Number(e.target.value))}
+        className="border rounded-lg px-3 py-2"
+      />
 
-            <button
-              onClick={sendWhatsApp}
-              className="w-full bg-green-500 text-white py-3 rounded-lg"
-            >
-              Enquire on WhatsApp
-            </button>
+      <input
+        type="number"
+        min="0"
+        value={children}
+        onChange={(e) => setChildren(Number(e.target.value))}
+        className="border rounded-lg px-3 py-2"
+      />
 
-            <button className="w-full bg-blue-500 text-white py-3 rounded-lg">
-              Book Now
-            </button>
+    </div>
 
+    <select
+      value={packageType}
+      required
+      onChange={(e) => setPackageType(e.target.value)}
+      className="w-full border rounded-lg px-3 py-2"
+    >
+      <option>Standard</option>
+      <option>Deluxe</option>
+      <option>Luxury</option>
+    </select>
 
-          </div>
+    <div className="bg-orange-50 p-4 rounded-xl text-center">
+
+      <p>Total Price</p>
+
+      <h4 className="text-2xl font-bold text-orange-500">
+        ₹ {totalPrice.toLocaleString()}
+      </h4>
+
+    </div>
+
+    <button
+      type="button"
+      onClick={sendWhatsApp}
+      className="w-full bg-green-500 text-white py-3 rounded-lg"
+    >
+      Enquire on WhatsApp
+    </button>
+
+    <button
+      type="submit"
+      className="w-full bg-blue-500 hover:bg-blue-600 transition text-white py-3 rounded-lg font-semibold"
+    >
+      Book Now
+    </button>
+
+  </form>
+</div>
+
+{/* BOOKING POPUP */}
+{showBookingPage && (
+  <div className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center p-4 overflow-y-auto">
+
+    <div className="bg-white max-w-2xl w-full rounded-3xl shadow-2xl p-8 relative animate-fadeIn">
+
+      {/* Close */}
+      <button
+        onClick={() => setShowBookingPage(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl"
+      >
+        ✕
+      </button>
+
+      {/* Success */}
+      <div className="flex justify-center mb-6">
+
+        <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center text-4xl">
+          ✅
         </div>
+
+      </div>
+
+      <h2 className="text-3xl font-bold text-center text-gray-800">
+        Booking Request Submitted
+      </h2>
+
+      <p className="text-center text-gray-500 mt-3 mb-8">
+        Thank you for choosing us. Here are your booking details.
+      </p>
+
+      {/* DETAILS */}
+      <div className="space-y-4">
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Name</span>
+          <span className="font-semibold">{name}</span>
+        </div>
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Email</span>
+          <span className="font-semibold">{email}</span>
+        </div>
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Phone</span>
+          <span className="font-semibold">{phone}</span>
+        </div>
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Travel Date</span>
+
+          <span className="font-semibold">
+            {fromDate} → {toDate}
+          </span>
+        </div>
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Travellers</span>
+
+          <span className="font-semibold">
+            {adults} Adults, {children} Children
+          </span>
+        </div>
+
+        <div className="flex justify-between border-b pb-3">
+          <span className="text-gray-500">Package</span>
+
+          <span className="font-semibold">
+            {packageType}
+          </span>
+        </div>
+
+        <div className="flex justify-between items-center bg-orange-50 rounded-xl p-4 mt-4">
+
+          <span className="text-lg font-semibold text-gray-700">
+            Total Amount
+          </span>
+
+          <span className="text-2xl font-bold text-orange-500">
+            ₹ {totalPrice.toLocaleString()}
+          </span>
+
+        </div>
+
+      </div>
+
+      {/* Bottom Message */}
+      <div className="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-5 text-center">
+
+        <h3 className="font-bold text-blue-700 text-lg">
+          Next Process
+        </h3>
+
+        <p className="text-gray-600 mt-2 leading-relaxed">
+          Our travel team will contact you shortly regarding payment,
+          booking confirmation, hotel details, and travel arrangements.
+        </p>
+
+      </div>
+
+      <button
+        onClick={() => setShowBookingPage(false)}
+        className="w-full mt-8 bg-gradient-to-r from-orange-500 to-pink-500 text-white py-3 rounded-2xl font-semibold hover:scale-[1.02] transition"
+      >
+        Done
+      </button>
+
+    </div>
+
+  </div>
+)}
 
       </div>
     </div>

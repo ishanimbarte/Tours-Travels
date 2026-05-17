@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
+
 export default function Contact() {
   const phoneNumber = "919999999999"; // change to your number
+
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  destination: "",
+  message: "",
+});
+
+const [success, setSuccess] = useState("");
 
   const openWhatsApp = () => {
     const message = "Hello, I want to enquire about tour packages.";
@@ -204,19 +215,57 @@ export default function Contact() {
               the perfect vacation experience.
             </p>
 
-            <form className="space-y-5">
+            <form
+                className="space-y-5"
+
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  if (
+                    !formData.name ||
+                    !formData.email ||
+                    !formData.phone ||
+                    !formData.destination
+                  ) {
+                    setSuccess("❌ Please fill all required fields");
+                    return;
+                  }
+
+                  setSuccess("✅ Enquiry Sent Successfully!");
+
+                  setTimeout(() => {
+                    setSuccess("");
+                  }, 3000);
+
+                  setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    destination: "",
+                    message: "",
+                  });
+                }}
+              >
 
               <div className="grid md:grid-cols-2 gap-5">
 
                 <input
                   type="text"
                   placeholder="Full Name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm"
                 />
 
                 <input
                   type="email"
                   placeholder="Email Address"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm"
                 />
 
@@ -227,12 +276,20 @@ export default function Contact() {
                 <input
                   type="tel"
                   placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                   className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm"
                 />
 
                 <input
                   type="text"
                   placeholder="Destination"
+                  value={formData.destination}
+                  onChange={(e) =>
+                    setFormData({ ...formData, destination: e.target.value })
+                  }
                   className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm"
                 />
 
@@ -241,6 +298,10 @@ export default function Contact() {
               <textarea
                 rows="5"
                 placeholder="Write your message..."
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 className="w-full px-5 py-4 rounded-2xl border border-gray-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-sm resize-none"
               />
 
@@ -250,6 +311,18 @@ export default function Contact() {
               >
                 Send Enquiry 🚀
               </button>
+
+              {success && (
+                <div
+                  className={`px-4 py-3 rounded-2xl text-center font-medium ${
+                    success.includes("❌")
+                      ? "bg-red-100 text-red-700 border border-red-300"
+                      : "bg-green-100 text-green-700 border border-green-300"
+                  }`}
+                >
+                  {success}
+                </div>
+              )}
 
             </form>
 
