@@ -91,7 +91,7 @@ export default function Navbar() {
               : "bg-transparent py-5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-8 md:px-6 flex justify-between items-center">
 
           {/* Logo */}
           <Link
@@ -105,13 +105,13 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center space-x-8 font-medium text-sm">
+          <ul className="hidden md:flex items-center space-x-20 font-medium text-sm">
 
-            <Link to="/virtual-tour" className={scrolled ? "text-white" : "text-white"}>
+            <Link to="/virtual-tour" className={`hover:text-orange-400 ${scrolled ? "text-white" : "text-white"}`}>
               Virtual Tour
             </Link>
 
-            <Link to="/about" className={scrolled ? "text-white" : "text-white"}>
+            <Link to="/about" className={`hover:text-orange-400 ${scrolled ? "text-white" : "text-white"}`}>
               About
             </Link>
 
@@ -121,7 +121,7 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter("packages")}
               onMouseLeave={handleLeave}
             >
-              <button className={`${scrolled ? "text-white" : "text-white"} flex items-center gap-1`}>
+              <button className={`hover:text-orange-400 ${scrolled ? "text-white" : "text-white"} flex items-center gap-1`}>
                 Packages <ChevronDown size={18} />
               </button>
 
@@ -129,36 +129,19 @@ export default function Navbar() {
 
               {dropdown === "packages" && (
                 <div className="absolute top-full left-0 mt-2 bg-black/40 text-white shadow-xl rounded-2xl p-10 w-[520px] grid grid-cols-2 gap-4 z-50">
-                  <Link to="/domestic-tours">Domestic Tours</Link>
-                  <Link to="/international-tours">International Tours</Link>
-                  <Link to="/honeymoon">Honeymoon Packages</Link>
-                  <Link to="/family-tours">Family Tours</Link>
-                  <Link to="/adventure-tours">Adventure Trips</Link>
-                  <Link to="/religious-tours">Religious Tours</Link>
+                  <Link to="/domestic-tours" className="hover:text-orange-400">Domestic Tours</Link>
+                  <Link to="/international-tours" className="hover:text-orange-400">International Tours</Link>
+                  <Link to="/honeymoon" className="hover:text-orange-400">Honeymoon Packages</Link>
+                  <Link to="/family-tours" className="hover:text-orange-400">Family Tours</Link>
+                  <Link to="/adventure-tours" className="hover:text-orange-400">Adventure Trips</Link>
+                  <Link to="/religious-tours" className="hover:text-orange-400">Religious Tours</Link>
                 </div>
               )}
             </div>
 
-            {/* Services */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleEnter("services")}
-              onMouseLeave={handleLeave}
-            >
-              <button className={`${scrolled ? "text-white" : "text-white"} flex items-center gap-1`}>
-                Services <ChevronDown size={18} />
-              </button>
+            
 
-              {dropdown === "services" && (
-                <div className="absolute top-full left-0 mt-2 bg-black/40 text-white shadow-xl rounded-2xl p-6 w-[200px] flex flex-col space-y-3 z-50">
-                  <Link to="/flight-booking">Ticket Booking</Link>
-                  <Link to="/hotel-booking">Hotel Booking</Link>
-                  <Link to="/visa-services">Visa Services</Link>
-                </div>
-              )}
-            </div>
-
-            <Link to="/contact" className={`${scrolled ? "text-white" : "text-white"}`}>
+            <Link to="/contact" className={`hover:text-orange-400 ${scrolled ? "text-white" : "text-white"}`}>
               Contact
             </Link>
           </ul>
@@ -168,7 +151,7 @@ export default function Navbar() {
 
             <Link
               to="/login"
-              className={`${scrolled ? "text-white" : "text-white"} px-4 py-2 rounded-sm border border-gray-300 hover:bg-gray-100`}
+              className={`${scrolled ? "text-white" : "text-white"} px-4 py-2 rounded-sm border border-gray-300 hover:bg-gray-100 hover:text-black transition`}
             >
               Login
             </Link>
@@ -279,29 +262,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Services */}
-          <div>
-            <button
-              className="flex justify-between items-center w-full"
-              onClick={() => setMobileServices(!mobileServices)}
-            >
-              Services
-              <ChevronDown
-                size={18}
-                className={`transition ${
-                  mobileServices ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {mobileServices && (
-              <div className="ml-4 mt-3 flex flex-col space-y-3 text-gray-600">
-                <Link to="/flight-booking" onClick={closeMenu}>Flight Booking</Link>
-                <Link to="/hotel-booking" onClick={closeMenu}>Hotel Booking</Link>
-                <Link to="/visa-services" onClick={closeMenu}>Visa Services</Link>
-              </div>
-            )}
-          </div>
+          
 
           <Link to="/contact" onClick={closeMenu}>Contact</Link>
 

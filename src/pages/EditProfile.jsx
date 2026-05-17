@@ -70,7 +70,6 @@ export default function EditProfile() {
 
       <div className="w-full max-w-3xl bg-white/70 backdrop-blur-xl shadow-2xl rounded-3xl p-8 md:p-10 border border-white/40">
 
-        
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center mb-8">

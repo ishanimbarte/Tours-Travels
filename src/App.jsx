@@ -6,7 +6,7 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import TopDestinations from "./components/TopDestinations";
 import Packages from "./components/Packages";
 import Testimonials from "./components/Testimonials";
-import Services from "./components/Services";
+// import Services from "./components/Services";
 import CTA from "./components/CTA";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -31,10 +31,6 @@ import AdventureTourDetails from "./pages/AdventureTourDetails";
 import ReligiousTours from "./pages/ReligiousTours";
 import ReligiousTourDetails from "./pages/ReligiousTourDetails";
 import AboutPage from "./pages/About";
-import BookingPage from "./pages/FlightBooking";
-import HotelBooking from "./pages/HotelBooking";
-import VisaServices from "./pages/VisaServices";
-import VisaApplication from "./pages/VisaApplication";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ScrollToTop from "./pages/ScrollToTop";
@@ -59,7 +55,6 @@ function App() {
               <TopDestinations />
               <Packages />
               <Testimonials />
-              <Services />
               <CTA />
               
             </>
@@ -67,7 +62,6 @@ function App() {
         />
 
         <Route path="/packages" element={<Packages />} />
-        {/* <Route path="/login" element={<h1>Login</h1>} /> */}
         <Route path="/package/:id" element={<PackageDetails />} />
         <Route path="/destination/:id" element={<TopDestinationsDetails />} />
         <Route path="/our-packages/:id" element={<OurPackagesDetails />} />
@@ -85,10 +79,6 @@ function App() {
         <Route path="/religious-tours" element={<ReligiousTours />} />
         <Route path="/religious-tours/:id" element={<ReligiousTourDetails />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/flight-booking" element={<BookingPage />} />
-        <Route path="/hotel-booking" element={<HotelBooking />} />
-        <Route path="/visa-services" element={<VisaServices />} />
-        <Route path="/visa-application" element={<VisaApplication />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/virtual-tour" element={<VirtualTour />} />
