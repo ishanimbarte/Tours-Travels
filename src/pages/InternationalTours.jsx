@@ -61,7 +61,7 @@ const tours = [
 
 export default function InternationalTours() {
   return (
-    <div className="pt-0 bg-gray-50 min-h-screen">
+    <div className="pt-24 bg-gray-50 min-h-screen">
 
       {/* Hero */}
       <div className="text-center max-w-3xl mx-auto px-6 mb-12">

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, User } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import gallery from "../assets/ph.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,8 +90,8 @@ export default function Navbar() {
               : scrolled
               ? "bg-black/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-black/5 py-5"
               : "bg-transparent py-5"
-          }`}
-      >
+          }`}>
+
         <div className="max-w-7xl mx-auto px-8 md:px-6 flex justify-between items-center">
 
           {/* Logo */}
@@ -150,54 +151,55 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6 mr-0">
 
             <Link
-              to="/login"
-              className={`${scrolled ? "text-white" : "text-white"} px-4 py-2 rounded-sm border border-gray-300 hover:bg-gray-100 hover:text-black transition`}
-            >
-              Login
+              to="/gallery"
+                onClick={closeMenu}
+                className="border p-2 rounded-lg flex items-center justify-center"
+              >
+                <img src={gallery} alt="Login" className="w-6 h-6 hover:text-white" />
             </Link>
 
-            <Link
+            {/* <Link
               to="/signup"
               className={`${scrolled ? "text-black" : "text-black"} px-5 py-2 rounded-sm bg-white hover:bg-blue-100`}
             >
               Sign Up
-            </Link>
+            </Link> */}
 
             {/* ✅ Profile Dropdown */}
-          <div className="relative" ref={profileRef}>
-            <button
-              onClick={() => setProfileOpen(!profileOpen)}
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition"
-            >
-              <User size={20} />
-            </button>
+            <div className="relative" ref={profileRef}>
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition"
+              >
+                <User size={20} />
+              </button>
 
-            {profileOpen && (
-              <div className="absolute right-0 mt-3 w-44 bg-white shadow-xl rounded-xl overflow-hidden border z-50">
+              {profileOpen && (
+                <div className="absolute right-0 mt-3 w-44 bg-white shadow-xl rounded-xl overflow-hidden border z-50">
 
-                {/* Edit Profile */}
-                <Link
-                  to="/edit-profile"
-                  className="block px-4 py-3 hover:bg-gray-100 text-sm"
-                  onClick={() => setProfileOpen(false)}
-                >
-                  Edit Profile
-                </Link>
+                  {/* Edit Profile */}
+                  <Link
+                    to="/edit-profile"
+                    className="block px-4 py-3 hover:bg-gray-100 text-sm"
+                    onClick={() => setProfileOpen(false)}
+                  >
+                    Edit Profile
+                  </Link>
 
-                {/* Logout */}
-                <button
-                  className="w-full text-left px-4 py-3 hover:bg-gray-100 text-sm"
-                  onClick={() => {
-                    setProfileOpen(false);
-                    alert("Logged out");
-                  }}
-                >
-                  Logout
-                </button>
+                  {/* Logout */}
+                  <button
+                    className="w-full text-left px-4 py-3 hover:bg-gray-100 text-sm"
+                    onClick={() => {
+                      setProfileOpen(false);
+                      alert("Logged out");
+                    }}
+                  >
+                    Logout
+                  </button>
 
-              </div>
-            )}
-          </div>
+                </div>
+              )}
+            </div>
 
           </div>
 
@@ -267,7 +269,7 @@ export default function Navbar() {
           <Link to="/contact" onClick={closeMenu}>Contact</Link>
 
           {/* Auth Buttons */}
-          <Link
+          {/* <Link
             to="/login"
             onClick={closeMenu}
             className="border px-4 py-2 rounded-lg text-center"
@@ -281,7 +283,7 @@ export default function Navbar() {
             className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center"
           >
             Sign Up
-          </Link>
+          </Link> */}
 
           {/* Profile Options */}
           <div className="border-t pt-4 flex flex-col space-y-3">

@@ -34,6 +34,7 @@ import Login from "./pages/Login";
 import ScrollToTop from "./pages/ScrollToTop";
 import VirtualTour from "./pages/VirtualTour";
 import EditProfile from "./pages/EditProfile";
+import Gallery from "./pages/gallery";
 
 function App() {
 
@@ -105,7 +106,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/virtual-tour" element={<VirtualTour />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
 
       <Footer />

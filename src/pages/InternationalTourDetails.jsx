@@ -130,7 +130,7 @@ Total Price: ₹${totalPrice}`;
   if (!pkg) return <div className="pt-32 text-center">Package Not Found</div>;
 
   return (
-    <div className="pt-0 bg-[#f8f6f2] overflow-hidden">
+    <div className="pt-0  bg-[#f8f6f2] overflow-hidden">
 
   {/* ================= HERO BANNER ================= */}
   <section className="relative h-[85vh] flex items-end">

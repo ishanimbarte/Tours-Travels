@@ -152,7 +152,7 @@ export default function IntroLoader() {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
-            transition={{ duration: 5, ease: "linear" }}
+            transition={{ duration: 8, ease: "linear" }}
             className="h-full bg-gradient-to-r from-orange-400 via-pink-500 to-rose-500 rounded-full"
           />
 
